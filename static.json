@@ -1,0 +1,21 @@
+{
+  "root": "dist",
+  "clean_urls": true,
+  "routes": {
+    "/**": "index.html"
+  },
+  "headers": {
+    "/**": {
+      "Cache-Control": "public, max-age=0, must-revalidate"
+    },
+    "/assets/**": {
+      "Cache-Control": "public, max-age=31536000, immutable"
+    },
+    "/manifest.webmanifest": {
+      "Content-Type": "application/manifest+json"
+    },
+    "/sw.js": {
+      "Cache-Control": "public, max-age=0, must-revalidate"
+    }
+  }
+}

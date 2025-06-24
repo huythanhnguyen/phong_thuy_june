@@ -1,0 +1,20 @@
+services:
+- type: web
+  name: phongthuysovue
+  env: node
+  buildCommand: npm install --legacy-peer-deps && npm run build
+  startCommand: npx serve -s dist -l $PORT
+  envVars:
+    - key: NODE_VERSION
+      value: 18
+  branch: main
+  autoDeploy: true
+  publishDir: dist
+  env: static
+  buildCommand: npm run build
+  staticPublishPath: ./dist
+  # Xóa phần startCommand vì không cần
+  routes:
+    - type: rewrite
+      source: /*
+      destination: /index.html

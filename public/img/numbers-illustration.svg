@@ -1,0 +1,273 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <!-- Định nghĩa gradient -->
+  <defs>
+    <!-- Gradient màu cát (xanh lá) -->
+    <linearGradient id="catGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4caf50" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#81c784" stop-opacity="1"/>
+    </linearGradient>
+    
+    <!-- Gradient màu hung (đỏ) -->
+    <linearGradient id="hungGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f44336" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#e57373" stop-opacity="1"/>
+    </linearGradient>
+    
+    <!-- Gradient màu trung tính (xanh dương) -->
+    <linearGradient id="neutralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4361ee" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#738bfc" stop-opacity="1"/>
+    </linearGradient>
+    
+    <!-- Hiệu ứng phát sáng -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <!-- Hiệu ứng sóng năng lượng nhẹ -->
+    <filter id="wave" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" result="turbulence"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Đường viền -->
+    <filter id="border">
+      <feFlood flood-color="black" result="black" />
+      <feComposite in="black" in2="SourceAlpha" operator="out" result="border" />
+      <feGaussianBlur in="border" stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="800" fill="#f5f7fa" opacity="0.8"/>
+  
+  <!-- Vòng tròn trung tâm -->
+  <circle cx="400" cy="400" r="280" fill="#f0f0f0" stroke="#333" stroke-width="2" opacity="0.95"/>
+  <circle cx="400" cy="400" r="230" fill="#e0e0e0" stroke="#333" stroke-width="2" opacity="0.95"/>
+  <circle cx="400" cy="400" r="100" fill="#f5f5f5" stroke="#333" stroke-width="2" opacity="0.95"/>
+  
+  <!-- Các đường quẻ Bát Quái -->
+  <!-- Càn (Tây Bắc - 7) -->
+  <g transform="translate(300, 300)">
+    <line x1="-80" y1="-80" x2="-130" y2="-130" stroke="#333" stroke-width="5"/>
+    <line x1="-70" y1="-90" x2="-120" y2="-140" stroke="#333" stroke-width="5"/>
+    <line x1="-90" y1="-70" x2="-140" y2="-120" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="-90" y1="-190" x2="-130" y2="-190" stroke="#333" stroke-width="8"/>
+    <line x1="-90" y1="-170" x2="-130" y2="-170" stroke="#333" stroke-width="8"/>
+    <line x1="-90" y1="-150" x2="-130" y2="-150" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Đoài (Tây - 6) -->
+  <g transform="translate(400, 400)">
+    <line x1="-200" y1="0" x2="-280" y2="0" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="-330" y1="25" x2="-370" y2="25" stroke="#333" stroke-width="8"/>
+    <line x1="-330" y1="0" x2="-370" y2="0" stroke="#333" stroke-width="8"/>
+    <line x1="-330" y1="-25" x2="-350" y2="-25" stroke="#333" stroke-width="8"/>
+    <line x1="-350" y1="-25" x2="-370" y2="-25" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Khảm (Bắc - 9) -->
+  <g transform="translate(400, 400)">
+    <line x1="0" y1="-200" x2="0" y2="-280" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="-20" y1="-330" x2="-20" y2="-370" stroke="#333" stroke-width="8"/>
+    <line x1="0" y1="-330" x2="0" y2="-370" stroke="#333" stroke-width="8"/>
+    <line x1="20" y1="-330" x2="20" y2="-350" stroke="#333" stroke-width="8"/>
+    <line x1="20" y1="-350" x2="20" y2="-370" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Cấn (Đông Bắc - 2) -->
+  <g transform="translate(400, 400)">
+    <line x1="80" y1="-80" x2="130" y2="-130" stroke="#333" stroke-width="5"/>
+    <line x1="70" y1="-90" x2="120" y2="-140" stroke="#333" stroke-width="5"/>
+    <line x1="90" y1="-70" x2="140" y2="-120" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="170" y1="-170" x2="170" y2="-190" stroke="#333" stroke-width="8"/>
+    <line x1="150" y1="-170" x2="150" y2="-190" stroke="#333" stroke-width="8"/>
+    <line x1="130" y1="-170" x2="130" y2="-190" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Chấn (Đông - 3) -->
+  <g transform="translate(400, 400)">
+    <line x1="200" y1="0" x2="280" y2="0" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="330" y1="-25" x2="370" y2="-25" stroke="#333" stroke-width="8"/>
+    <line x1="330" y1="0" x2="370" y2="0" stroke="#333" stroke-width="8"/>
+    <line x1="330" y1="25" x2="350" y2="25" stroke="#333" stroke-width="8"/>
+    <line x1="350" y1="25" x2="370" y2="25" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Tốn (Đông Nam - 4) -->
+  <g transform="translate(400, 400)">
+    <line x1="80" y1="80" x2="130" y2="130" stroke="#333" stroke-width="5"/>
+    <line x1="70" y1="90" x2="120" y2="140" stroke="#333" stroke-width="5"/>
+    <line x1="90" y1="70" x2="140" y2="120" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="130" y1="170" x2="130" y2="190" stroke="#333" stroke-width="8"/>
+    <line x1="150" y1="170" x2="150" y2="190" stroke="#333" stroke-width="8"/>
+    <line x1="170" y1="170" x2="170" y2="190" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Ly (Nam - 1) -->
+  <g transform="translate(400, 400)">
+    <line x1="0" y1="200" x2="0" y2="280" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="-20" y1="330" x2="-20" y2="370" stroke="#333" stroke-width="8"/>
+    <line x1="0" y1="330" x2="0" y2="370" stroke="#333" stroke-width="8"/>
+    <line x1="20" y1="330" x2="20" y2="350" stroke="#333" stroke-width="8"/>
+    <line x1="20" y1="350" x2="20" y2="370" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Khôn (Tây Nam - 8) -->
+  <g transform="translate(400, 400)">
+    <line x1="-80" y1="80" x2="-130" y2="130" stroke="#333" stroke-width="5"/>
+    <line x1="-70" y1="90" x2="-120" y2="140" stroke="#333" stroke-width="5"/>
+    <line x1="-90" y1="70" x2="-140" y2="120" stroke="#333" stroke-width="5"/>
+    
+    <!-- Đoạn gạch -->
+    <line x1="-130" y1="170" x2="-130" y2="190" stroke="#333" stroke-width="8"/>
+    <line x1="-150" y1="170" x2="-150" y2="190" stroke="#333" stroke-width="8"/>
+    <line x1="-170" y1="170" x2="-170" y2="190" stroke="#333" stroke-width="8"/>
+  </g>
+  
+  <!-- Ký tự chữ Hán -->
+  <g transform="translate(400, 400)" opacity="0.9">
+    <text x="0" y="-160" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">坎</text>
+    <text x="160" y="0" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">震</text>
+    <text x="0" y="160" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">離</text>
+    <text x="-160" y="0" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">兌</text>
+    <text x="-110" y="-110" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">乾</text>
+    <text x="110" y="-110" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">艮</text>
+    <text x="110" y="110" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">巽</text>
+    <text x="-110" y="110" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#000">坤</text>
+  </g>
+
+  <!-- Biểu tượng trung tâm -->
+  <g transform="translate(400, 400)">
+    <line x1="-40" y1="0" x2="40" y2="0" stroke="#333" stroke-width="4"/>
+    <line x1="0" y1="-40" x2="0" y2="40" stroke="#333" stroke-width="4"/>
+    <circle cx="0" cy="0" r="10" fill="#333"/>
+    <circle cx="-40" cy="0" r="6" fill="#333"/>
+    <circle cx="40" cy="0" r="6" fill="#333"/>
+    <circle cx="0" cy="-40" r="6" fill="#333"/>
+    <circle cx="0" cy="40" r="6" fill="#333"/>
+  </g>
+
+  <!-- Các số chính với hiệu ứng sáng -->
+  <!-- Số 5 (Trung tâm) -->
+  <g transform="translate(400, 400)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#neutralGradient)" filter="url(#glow)">5</text>
+  </g>
+  
+  <!-- Số 9 (Bắc) -->
+  <g transform="translate(400, 130)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#neutralGradient)">9</text>
+    <line x1="-20" y1="30" x2="20" y2="30" stroke="#333" stroke-width="4"/>
+  </g>
+  
+  <!-- Số 7 (Tây Bắc) -->
+  <g transform="translate(200, 200)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#neutralGradient)">7</text>
+  </g>
+  
+  <!-- Số 6 (Tây) -->
+  <g transform="translate(130, 400)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#catGradient)">6</text>
+  </g>
+  
+  <!-- Số 8 (Tây Nam) - hung trong ví dụ -->
+  <g transform="translate(200, 600)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#hungGradient)">8</text>
+    <circle cx="50" cy="-30" r="8" fill="#f44336"/>
+    <circle cx="70" cy="-30" r="8" fill="#f44336"/>
+    <circle cx="90" cy="-30" r="8" fill="#f44336"/>
+    <circle cx="50" cy="-50" r="8" fill="#f44336"/>
+    <circle cx="70" cy="-50" r="8" fill="#f44336"/>
+    <circle cx="90" cy="-50" r="8" fill="#f44336"/>
+  </g>
+  
+  <!-- Số 1 (Nam) - hung trong ví dụ -->
+  <g transform="translate(400, 670)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#hungGradient)">1</text>
+    <circle cx="0" cy="-80" r="8" fill="#f44336"/>
+  </g>
+  
+  <!-- Số 4 (Đông Nam) - hung trong ví dụ -->
+  <g transform="translate(600, 600)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#hungGradient)">4</text>
+    <circle cx="-70" cy="-30" r="8" fill="#f44336"/>
+    <circle cx="-70" cy="-50" r="8" fill="#f44336"/>
+  </g>
+  
+  <!-- Số 3 (Đông) - hung trong ví dụ -->
+  <g transform="translate(670, 400)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#hungGradient)">3</text>
+    <circle cx="-80" cy="0" r="8" fill="#f44336"/>
+    <circle cx="-80" cy="20" r="8" fill="#f44336"/>
+    <circle cx="-80" cy="-20" r="8" fill="#f44336"/>
+  </g>
+  
+  <!-- Số 2 (Đông Bắc) - cát trong ví dụ -->
+  <g transform="translate(600, 200)" filter="url(#glow)">
+    <text font-family="Arial" font-size="70" font-weight="bold" text-anchor="middle" fill="url(#catGradient)">2</text>
+  </g>
+
+  <!-- Đường viền trên cùng -->
+  <g transform="translate(400, 80)">
+    <rect x="-150" y="-30" width="300" height="50" fill="white" stroke="#333" stroke-width="2" rx="5" ry="5"/>
+    <text font-family="SimSun, Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#000">洛书与九宫后天八卦</text>
+  </g>
+
+  <!-- Thêm các điểm trang trí như trong hình -->
+  <g>
+    <!-- Điểm phía bắc -->
+    <circle cx="400" cy="70" r="5" fill="#000"/>
+    <circle cx="380" cy="70" r="5" fill="#000"/>
+    <circle cx="360" cy="70" r="5" fill="#000"/>
+    <circle cx="340" cy="70" r="5" fill="#000"/>
+    <circle cx="420" cy="70" r="5" fill="#000"/>
+    <circle cx="440" cy="70" r="5" fill="#000"/>
+    <circle cx="460" cy="70" r="5" fill="#000"/>
+    <circle cx="320" cy="70" r="5" fill="#000"/>
+    <circle cx="480" cy="70" r="5" fill="#000"/>
+    
+    <!-- Các điểm khác -->
+    <circle cx="730" cy="200" r="5" fill="#000"/>
+    <circle cx="730" cy="220" r="5" fill="#000"/>
+    <circle cx="730" cy="180" r="5" fill="#000"/>
+    
+    <circle cx="730" cy="400" r="5" fill="#000"/>
+    <circle cx="710" cy="400" r="5" fill="#000"/>
+    
+    <circle cx="730" cy="600" r="5" fill="#000"/>
+    <circle cx="730" cy="580" r="5" fill="#000"/>
+    <circle cx="730" cy="560" r="5" fill="#000"/>
+    <circle cx="730" cy="540" r="5" fill="#000"/>
+    <circle cx="730" cy="620" r="5" fill="#000"/>
+    <circle cx="730" cy="640" r="5" fill="#000"/>
+    
+    <circle cx="70" cy="400" r="5" fill="#000"/>
+    <circle cx="90" cy="400" r="5" fill="#000"/>
+    
+    <circle cx="160" cy="160" r="5" fill="#000"/>
+    <circle cx="180" cy="140" r="5" fill="#000"/>
+  </g>
+
+  <!-- Hiệu ứng năng lượng -->
+  <g opacity="0.3" filter="url(#wave)">
+    <circle cx="400" cy="400" r="340" fill="none" stroke="url(#neutralGradient)" stroke-width="10" stroke-dasharray="20,10" opacity="0.2"/>
+    <circle cx="400" cy="400" r="300" fill="none" stroke="url(#catGradient)" stroke-width="8" stroke-dasharray="10,15" opacity="0.15" transform="rotate(30 400 400)"/>
+    <circle cx="400" cy="400" r="260" fill="none" stroke="url(#hungGradient)" stroke-width="6" stroke-dasharray="5,10" opacity="0.1" transform="rotate(60 400 400)"/>
+  </g>
+</svg>

@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Giữ lại các biến CSS đã có */
+:root {
+    --primary-color: #4361ee;
+    --primary-light: #e7ecfd;
+    --primary-dark: #3a56d4;
+    --secondary-color: #3f37c9;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --text-light: #ffffff;
+    
+    /* Semantic Colors */
+    --success-color: #4caf50;
+    --success-light: #e8f5e9;
+    --warning-color: #ff9800;
+    --warning-light: #fff3e0;
+    --danger-color: #f44336;
+    --danger-light: #ffebee;
+    --auspicious-color: #4caf50;
+    --inauspicious-color: #f44336;
+    --neutral-color: #757575;
+    
+    /* Background and Borders */
+    --background-color: #f5f7fa;
+    --chat-bg: #ffffff;
+    --user-msg-bg: #e3f2fd;
+    --bot-msg-bg: #f5f5f5;
+    --border-color: #e0e0e0;
+}
+
+/* Tích hợp Tailwind và giữ lại một số utility classes quan trọng */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-dark transition-colors;
+  }
+  
+  .btn-outline {
+    @apply bg-white text-gray-700 border border-gray-300 font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition-colors;
+  }
+  
+  .auth-btn {
+    @apply font-semibold rounded-md cursor-pointer transition-all px-4 py-2 text-sm;
+  }
+  
+  .login-btn {
+    @apply bg-gray-900 text-white border-none;
+  }
+  
+  .signup-btn {
+    @apply bg-white text-gray-900 border border-gray-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-sm p-4;
+  }
+  
+  .section-title {
+    @apply block mb-2 text-primary font-semibold;
+  }
+  
+  .feature-card {
+    @apply bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow;
+  }
+  
+  .feature-icon {
+    @apply w-10 h-10 bg-primary-light text-primary rounded-full flex items-center justify-center mb-4;
+  }
+  
+  .feature-title {
+    @apply font-semibold text-lg mb-2 text-gray-800;
+  }
+  
+  .feature-description {
+    @apply text-gray-600 text-sm leading-relaxed;
+  }
+}
+
+/* Reset & Base (Tailwind sẽ xử lý phần lớn, chỉ giữ lại một số style đặc thù) */
+body {
+  @apply font-sans min-h-screen text-gray-800 bg-gray-50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  @apply text-primary no-underline transition-colors;
+}
+
+a:hover {
+  @apply text-primary-dark;
+}
+
+button {
+  @apply cursor-pointer font-sans;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

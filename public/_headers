@@ -1,0 +1,14 @@
+/*.css
+  Content-Type: text/css
+/*.js
+  Content-Type: application/javascript
+/*.svg
+  Content-Type: image/svg+xml
+
+/service-worker.js
+  Cache-Control: max-age=0
+  Content-Type: application/javascript
+
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block

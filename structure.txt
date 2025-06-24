@@ -1,0 +1,63 @@
+.
+├── index.html
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── public
+│   ├── _headers
+│   ├── img
+│   │   └── numbers-illustration.svg
+│   └── vite.svg
+├── README.md
+├── render.yaml
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   ├── main.css
+│   │   └── vue.svg
+│   ├── components
+│   │   ├── analysis
+│   │   │   ├── AnalysisResult.vue
+│   │   │   ├── DetailedAnalysis.vue
+│   │   │   ├── EnergyBalance.vue
+│   │   │   ├── StarCombinations.vue
+│   │   │   └── StarList.vue
+│   │   ├── auth
+│   │   │   └── PasswordChangeForm.vue
+│   │   ├── chat
+│   │   │   ├── ChatInput.vue
+│   │   │   ├── ChatMessage.vue
+│   │   │   └── TypingIndicator.vue
+│   │   └── layout
+│   │       ├── AppHeader.vue
+│   │       ├── ModalDialog.vue
+│   │       └── Sidebar.vue
+│   ├── main.js
+│   ├── router
+│   │   └── index.js
+│   ├── services
+│   │   ├── analysisService.js
+│   │   ├── api.js
+│   │   └── authService.js
+│   ├── stores
+│   │   ├── analysis.js
+│   │   ├── auth.js
+│   │   └── chat.js
+│   ├── style.css
+│   ├── utils
+│   │   └── index.js
+│   └── views
+│       ├── AppView.vue
+│       ├── guides
+│       │   ├── BatCucLinhSo.vue
+│       │   ├── CanCuocCongDan.vue
+│       │   ├── ChonSoDienThoai.vue
+│       │   └── ChonSoNganHang.vue
+│       ├── HomeView.vue
+│       └── LoginView.vue
+├── static.json
+├── structure.txt
+├── tailwind.config.js
+└── vite.config.js
+
+15 directories, 45 files
