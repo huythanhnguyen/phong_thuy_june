@@ -1,12 +1,13 @@
 <template>
   <div class="number-type-selector">
     <h2 class="text-xl font-semibold text-gray-700 mb-4 text-center">Chọn loại số cần phân tích</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+    <!-- Mobile: 4 cột, hiển thị gọn chỉ icon + tên -->
+    <div class="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
       <div 
         v-for="type in numberTypes" 
         :key="type.id"
         :class="[
-          'type-card cursor-pointer p-4 rounded-lg border-2 transition-all duration-300 hover:shadow-lg transform hover:scale-105',
+          'type-card cursor-pointer p-2 sm:p-4 rounded-lg border-2 transition-all duration-300 hover:shadow-lg transform hover:scale-105',
           selectedType === type.id 
             ? 'border-blue-500 bg-blue-50 shadow-md' 
             : 'border-gray-200 bg-white hover:border-blue-300'
@@ -32,16 +33,18 @@
             {{ type.name }}
           </h3>
           
-          <!-- Description -->
-          <p :class="[
-            'text-sm mb-3',
+          <!-- Description (hidden on mobile) -->
+          <p
+            :class="[
+              'text-sm mb-3 hidden sm:block',
             selectedType === type.id ? 'text-blue-600' : 'text-gray-500'
-          ]">
+            ]"
+          >
             {{ type.description }}
           </p>
           
-          <!-- Examples -->
-          <div class="type-examples space-y-1">
+          <!-- Examples (hidden on mobile) -->
+          <div class="type-examples space-y-1 hidden sm:block">
             <div class="text-xs text-gray-400 mb-1">Ví dụ:</div>
             <div class="flex flex-wrap gap-1 justify-center">
               <span 
@@ -101,6 +104,7 @@ const getIconForType = (iconType) => {
     calendar: '📅',
     bank: '🏦',
     lock: '🔐',
+    dice: '🎲',
     car: '🚗'
   };
   return icons[iconType] || '📊';

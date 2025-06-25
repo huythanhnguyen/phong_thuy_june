@@ -1,4 +1,3 @@
-// Bát Tinh constants - dựa từ chatbotsdtapi backend
 export const BAT_TINH = {
     // Tứ cát tỉnh - Four Auspicious Stars
     SINH_KHI: {
@@ -24,8 +23,34 @@ export const BAT_TINH = {
             HIGH: ["14", "41", "67", "76"], // Động số, đại quý nhân (năng lượng 3,4)
             LOW: ["39", "93", "28", "82"]   // Tĩnh số, tiểu quý nhân (năng lượng 1,2)
         },
+        position: "Nên ở giữa", // Recommended position in number
+        nature: "Cát" // Auspicious
+    },
+    
+    // SINH_KHI có số 0
+    SINH_KHI_ZERO: {
+        name: "Sinh Khí hoa hung",
+        description: "Sinh Khí có số 0: Quí nhân hoá tiểu nhân, chiêu nạp người xấu về bên mình",
+        detailedDescription: `Tính cách lạc quan, nhìn mọi thứ rất thoáng, là người yên vui, lấy tâm bình tĩnh, bình thản để đối đãi, mọi thứ tuỳ duyên, không so đo cưỡng cầu.
+- Thích trợ giúp người khác, có nhiều nhân duyên và bạn bè tốt, bằng hữu nhiều. Không thích so đo và cứng nhắc.
+- Người tưởng tốt hóa ra có ý đồ xấu, người giúp đỡ lại khiến gặp rắc rối.
+- Dễ gặp phải người hai mặt, bề ngoài tốt nhưng có ý đồ lợi dụng.
+- Cần thận trọng khi tin tưởng người khác, đặc biệt là người mới quen.
+- Quý nhân có thể biến thành tiểu nhân, thường gặp phải người không thật lòng.`,
+        numbers: ["104", "140", "401", "410", "607", "670", "706", "760",
+                  "309", "390", "903", "930", "208", "280", "802", "820"],
+        energy: {
+            "140": 4.5, "410": 4.5, // Mức năng lượng cao nhất
+            "104": 4, "401": 4, // Mức năng lượng cao nhất
+            "670": 3.5, "760": 3.5,
+            "607": 3, "706": 3,  // Mức năng lượng cao
+            "930": 2.5, "390": 2.5,  // Mức năng lượng trung bình
+            "903": 2, "309": 2,  // Mức năng lượng trung bình
+            "820": 1, "280": 1,   // Mức năng lượng thấp
+            "802": 1, "208": 1   // Mức năng lượng thấp
+        },
         position: "Nên ở giữa",
-        nature: "Cát"
+        nature: "Cát hóa hung" // cát hóa hung
     },
     
     THIEN_Y: {
@@ -51,8 +76,35 @@ export const BAT_TINH = {
             HIGH: ["13", "31", "68", "86"], // Động số, đại tài (năng lượng 3,4)
             LOW: ["49", "94", "27", "72"]   // Tĩnh số, tiểu tài (năng lượng 1,2)
         },
+        position: "Nên ở hậu phương", // Recommended position
+        nature: "Cát" // Auspicious
+    },
+    
+    // THIEN_Y có số 0
+    THIEN_Y_ZERO: {
+        name: "Thiên Y hoa hung",
+        description: "Thiên Y có số 0: Đang có tiền thành mất tiền, lớn mất lớn, ít mất ít",
+        detailedDescription: `Thông minh, thiện lương, hào phóng, thích giúp đỡ người khác.
+- Tính tình rất giản đơn, không có tâm cơ thâm hiểm, hạnh phúc đôi lứa, hạnh phúc vợ chồng đều đoan chính.
+- Tiền kiếm được chân chính nhưng vì quá thiện lương cũng không thích so đo nên rất dễ bị lừa và lợi dụng.
+- Không màng danh lợi, không quá quan trọng đồng tiền, những khoản tiền nhỏ thường không chú ý nhiều.
+- Tiền tài đang được hưởng sẽ giảm sút hoặc mất đi.
+- Vận may về tài chính có thể suy giảm đáng kể.
+- Có thể có các tổn thất tài chính không lường trước được.`,
+        numbers: ["103", "130", "301", "310", "608", "680", "806", "860",
+                 "409", "490", "904", "940", "207", "270", "702", "720"],
+        energy: {
+            "130": 4.5, "310": 4.5, // Mức năng lượng cao nhất
+            "103": 4, "301": 4, // Mức năng lượng cao nhất
+            "680": 3.5, "860": 3.5,
+            "608": 3, "806": 3,  // Mức năng lượng cao
+            "940": 2.5, "490": 2.5,  // Mức năng lượng trung bình
+            "904": 2, "409": 2,  // Mức năng lượng trung bình
+            "720": 1, "270": 1,   // Mức năng lượng thấp
+            "702": 1, "207": 1   // Mức năng lượng thấp
+        },
         position: "Nên ở hậu phương",
-        nature: "Cát"
+        nature: "Cát hóa hung" // 
     },
     
     DIEN_NIEN: {
@@ -79,13 +131,40 @@ export const BAT_TINH = {
             HIGH: ["19", "91", "78", "87"], // Động số, đại lãnh đạo (năng lượng 3,4)
             LOW: ["34", "43", "26", "62"]   // Tĩnh số, tiểu lãnh đạo (năng lượng 1,2)
         },
+        position: "Nên ở hậu phương", // Recommended position
+        nature: "Cát" // Auspicious
+    },
+    
+    // DIEN_NIEN có số 0
+    DIEN_NIEN_ZERO: {
+        name: "Diên Niên hoa hung",
+        description: "Diên Niên có số 0: Làm việc nỗ lực mãi không thành, công việc cứ bị cản trở",
+        detailedDescription: `Thường là lãnh đạo, chúa tể một phương, không dễ thuyết phục, trừ khi ai đó năng lực cao hơn hẳn.
+- Là người có trách nhiệm, tâm lý vững vàng, lập trường ổn định, có cam đảm và đảm đương được.
+- Diên Niên có số 0: Làm việc nỗ lực mãi không thành, công việc cứ bị cản trở.
+- Mọi công sức bỏ ra thường không đạt được kết quả như mong muốn.
+- Thường xuyên gặp chướng ngại, trở ngại trong công việc và sự nghiệp.
+- Áp lực công việc lớn nhưng kết quả không tương xứng với nỗ lực bỏ ra.
+- Khó thăng tiến trong sự nghiệp, dễ bị người khác cản trở.`,
+        numbers: ["109", "190", "901", "910", "708", "780", "807", "870",
+                  "304", "340", "403", "430", "206", "260", "602", "620"],
+        energy: {
+            "190": 4.5, "910": 4.5, // Mức năng lượng cao nhất
+            "109": 4, "901": 4, // Mức năng lượng cao nhất
+            "780": 3.5, "870": 3.5,
+            "708": 3, "807": 3,  // Mức năng lượng cao
+            "340": 2.5, "430": 2.5,  // Mức năng lượng trung bình
+            "304": 2, "403": 2,  // Mức năng lượng trung bình
+            "260": 1, "620": 1,   // Mức năng lượng thấp
+            "206": 1, "602": 1   // Mức năng lượng thấp
+        },
         position: "Nên ở hậu phương",
-        nature: "Cát"
+        nature: "Cát hóa hung" // 
     },
     
     PHUC_VI: {
         name: "Phục Vị",
-        description: "Chịu đựng, khó thay đổi",
+        description: "chiu dung, kho thay doi",
         detailedDescription: `Giỏi chịu đựng, có nghị lực hơn người, tiếng nói có sức ảnh hưởng, tiềm ẩn năng lực rất lớn.
 - Lập trường vững vàng, không dễ biến động, không thích bị nói đạo lý, mà phải làm gương tốt.
 - Thường lo lắng, không có cảm giác an toàn, khó đưa ra lựa chọn và rất cần sự cổ vũ động viên.
@@ -105,21 +184,48 @@ export const BAT_TINH = {
             HIGH: ["11", "22", "88", "99"], // Động số (năng lượng 3,4)
             LOW: ["66", "77", "33", "44"]   // Tĩnh số (năng lượng 1,2)
         },
+        position: "Không nên có", // Should not appear in auspicious combinations
+        nature: "Cát/Hung" // Can be both auspicious or inauspicious
+    },
+    
+    // PHUC_VI có số 0
+    PHUC_VI_ZERO: {
+        name: "Phục Vị",
+        description: "Phục Vị có số 0: Trì trệ, chờ đợi, không thay đổi, dễ bỏ lỡ cơ hội",
+        detailedDescription: `Giỏi chịu đựng, có nghị lực hơn người, tiếng nói có sức ảnh hưởng, tiềm ẩn năng lực rất lớn.
+- Lập trường vững vàng, không dễ biến động, không thích bị nói đạo lý, mà phải làm gương tốt.
+- Khó hòa nhập với môi trường mới, thích giữ nguyên hiện trạng.
+- Lo lắng quá mức, thường xuyên bỏ lỡ cơ hội tốt.
+- Sự nghiệp khó phát triển, dễ rơi vào tình trạng bế tắc.
+- Dễ bỏ lỡ những cơ hội tốt vì quá thận trọng và không dám quyết định.`,
+        numbers: ["110", "220", "330", "440", "660", "770", "880", "990",
+                  "101", "202", "303", "404", "606", "707", "808", "909"],
+        energy: {
+            "110": 4.5, "220": 4.5, // Giảm năng lượng so với gốc
+            "990": 3.5, "880": 3.5,
+            "101": 4, "202": 4,
+            "808": 3, "909": 3,
+            "707": 2, "606": 2,
+            "303": 1, "404": 1,
+            "330": 1.5, "440": 1.5 // Giảm mạnh năng lượng
+        },
         position: "Không nên có",
-        nature: "Cát/Hung"
+        nature: "Cát/Hung hóa hung" // Thường thiên về Hung khi có số 0
     },
     
     // Tứ hung tỉnh - Four Inauspicious Stars
     HOA_HAI: {
         name: "Họa Hại",
-        description: "Khẩu tiết, tranh chấp, ăn nói",
-        detailedDescription: `Thông minh, khẩu tiết tốt, khiếu ăn nói lưu loát, có khiếu bán hàng và giao tiếp.
-- Thường nhiều miệng, thích nói chuyện, thường để ý đến từng chữ, từng câu của người khác.
-- Có khả năng hùng biện, thích tranh luận, đàm phán, thích hợp làm luật sư, MC, bán hàng.
-- Tuy nhiên dễ gây hấn, dễ mắc lỗi về lời nói, thường xuyên có tranh chấp do ăn nói.
-- Sự nghiệp: thích hợp với nghề cần ăn nói như sales, MC, giảng viên, luật sư.
-- Tình cảm: dễ có tranh cãi trong tình cảm, cần học cách kiềm chế lời nói.
-- Sức khỏe: cần chú ý bệnh về miệng, răng, họng, hô hấp.`,
+        description: "Khẩu tài, chi tiêu lớn, lấy miệng là nghiệp",
+        detailedDescription: `Miệng lưỡi lưu loát, hùng biện giỏi, biết ăn nói, dùng miệng để kiếm ra tiền, ăn nói khéo léo, dễ đi vào lòng người.
+- Phù hợp làm thầy giáo, chuyên gia đào tạo, giảng dạy, lấy nghiệp ăn nói để kiếm ra tiền tài.
+- Tính tình nóng nảy nên hay cãi vã thị phi, ít người yêu mến, hay ốm yếu. Thẳng thắn, mạnh miệng, thích sĩ diện.
+- Hay gây gổ, làm mọi người khẩu phục và tâm không phục, thích để tâm vào chuyện vụn vặt.
+- Tài vận: mở miệng là có tiền, dễ vì cãi vã mà mất tiền, khó giữ tiền.
+- Tình cảm: đầu tiên thì ngon ngọt, sau đó thì dễ cãi vã thị phi, ly hôn.
+- Sức khỏe: bệnh ở khoang miệng, yếu hầu, họng, tuyến bạch huyết, lồng ngực, hao tổn nguyên khí.
+- Không có quý nhân, nhiều thị phi.
+- Học tập: rất giỏi học về ngôn ngữ, ngành nghề cần lấy tài ăn nói để kiếm ra tiền rất phù hợp.`,
         numbers: ["17", "71", "89", "98", "46", "64", "23", "32"],
         energy: {
             "17": 4, "71": 4,  // Mức năng lượng cao nhất
@@ -128,48 +234,101 @@ export const BAT_TINH = {
             "23": 1, "32": 1   // Mức năng lượng thấp
         },
         level: {
-            HIGH: ["17", "71", "89", "98"], // Động số (năng lượng 3,4)
-            LOW: ["46", "64", "23", "32"]   // Tĩnh số (năng lượng 1,2)
+            HIGH: ["17", "71", "89", "98"], // Năng lượng 3,4
+            LOW: ["46", "64", "23", "32"]   // Năng lượng 1,2
         },
-        position: "Có thể ở đầu",
-        nature: "Hung"
+        nature: "Hung" // Inauspicious
+    },
+    
+    // HOA_HAI có số 0
+    HOA_HAI_ZERO: {
+        name: "Họa Hại",
+        description: "Họa Hại có số 0: Ân bệnh, không bộc phát, nếu bộc phát sẽ rất nhanh",
+        detailedDescription: `Miệng lưỡi lưu loát, hùng biện giỏi, biết ăn nói, dùng miệng để kiếm ra tiền, ăn nói khéo léo, dễ đi vào lòng người.
+- Phù hợp làm thầy giáo, chuyên gia đào tạo, giảng dạy, lấy nghiệp ăn nói để kiếm ra tiền tài.
+- Họa Hại có số 0: Ân bệnh, không bộc phát, nếu bộc phát sẽ rất nhanh. Họa thị phi, kiện cáo, cãi vã, có thể gây kiện cáo kéo dài.
+- Có nguy cơ mắc bệnh tiềm ẩn không phát hiện sớm, khi phát bệnh thì diễn biến nhanh, nghiêm trọng.
+- Dễ gặp phải rắc rối về pháp lý, tranh chấp, kiện tụng kéo dài.
+- Dễ vướng vào các cuộc tranh cãi, thị phi không đáng có.
+- Lời nói có thể gây ra hậu quả nghiêm trọng không lường trước.`,
+        numbers: ["107", "170", "701", "710", "809", "890", "908", "980",
+                  "406", "460", "604", "640", "203", "230", "302", "320"],
+        energy: {
+            "170": 4.5, "710": 4.5, // Mức năng lượng cao nhất (tiêu cực)
+            "107": 4, "701": 4, // Mức năng lượng cao nhất (tiêu cực)
+            "890": 3.5, "980": 3.5,
+            "809": 3, "908": 3,  // Mức năng lượng cao
+            "460": 2.5, "640": 2.5,  // Mức năng lượng trung bình
+            "406": 2, "604": 2,  // Mức năng lượng trung bình
+            "230": 1.5, "320": 1.5,   // Mức năng lượng thấp
+            "203": 1, "302": 1   // Mức năng lượng thấp
+        },
+        nature: "Hung hóa hung" // Năng lượng Hung tăng cường
     },
     
     LUC_SAT: {
         name: "Lục Sát",
-        description: "Thị phi, mất mát, người xấu",
-        detailedDescription: `Dễ gặp tiểu nhân, thị phi, mất mát tài sản, rắc rối pháp lý.
-- Thường gặp phải người có ý đồ xấu, bị lừa gạt, lợi dụng.
-- Dễ có tranh chấp về tài sản, tiền bạc, hợp đồng.
-- Hay gặp rắc rối với pháp luật, giấy tờ, thủ tục.
-- Sự nghiệp: cần cẩn thận với đối tác, khách hàng, tránh bị lừa.
-- Tình cảm: dễ gặp người không tốt, cần thận trọng khi yêu.
-- Tài chính: dễ bị mất tiền, đầu tư thất bại, cần quản lý tài chính cẩn thận.`,
-        numbers: ["16", "61", "38", "83", "47", "74", "29", "92"],
+        description: "Giao tế, phục vụ, cửa hàng, nữ nhân",
+        detailedDescription: `Kinh nghiệm bản thân tốt, nhân duyên tốt, nhất là với người khác phái, am hiểu giao tiếp, tiếp đãi và thiết lập mối quan hệ.
+- Đi ra ngoài biết cách giao thiệp, có thể là giao thiệp với nước ngoài. Tư duy tinh tế tỉ mỉ, giàu tình cảm.
+- Khuyết điểm: Hay nhạy cảm đa nghi, thích tưởng tượng và hay suy diễn, không quá quyết chắc chắn được.
+- Năng lực chịu đựng rất kém. Hay do dự, quá cẩn thận. Rất dễ u buồn, tự kỉ thậm chí tự sát.
+- Tình cảm: tình cảm phong phú đặc sắc, duyên với người khác phái rất mạnh, tính nết cẩn thận và nhạy cảm, hay khổ vì tình.
+- Tài vận: dựa vào mối quan hệ để kiếm tiền tốt, tiêu tiền cho gia đình và cũng không giữ được tiền.
+- Sự nghiệp: quan hệ xã hội, ngoại giao, nghề phục vụ hoặc làm đẹp, nghành nghề liên quan đến nữ tính, nghệ thuật.
+- Sức khỏe: bệnh về da, dạ dày, buồng trứng, nóng nảy, tự kỉ, u uất tinh thần.
+- Dễ được nhưng dễ mất, rất nhiều cơ hội sinh tiền tài, khéo léo có tiền, thích chưng diện, ăn mặc thời thượng.`,
+        numbers: ["16", "61", "47", "74", "38", "83", "92", "29"],
         energy: {
             "16": 4, "61": 4,  // Mức năng lượng cao nhất
-            "38": 3, "83": 3,  // Mức năng lượng cao
-            "47": 2, "74": 2,  // Mức năng lượng trung bình
-            "29": 1, "92": 1   // Mức năng lượng thấp
+            "47": 3, "74": 3,  // Mức năng lượng cao
+            "38": 2, "83": 2,  // Mức năng lượng trung bình
+            "92": 1, "29": 1   // Mức năng lượng thấp
         },
         level: {
-            HIGH: ["16", "61", "38", "83"], // Động số (năng lượng 3,4)
-            LOW: ["47", "74", "29", "92"]   // Tĩnh số (năng lượng 1,2)
+            HIGH: ["16", "61", "47", "74"], // Năng lượng 3,4
+            LOW: ["38", "83", "92", "29"]   // Năng lượng 1,2
         },
-        position: "Không nên có",
-        nature: "Hung"
+        nature: "Hung" // Inauspicious
+    },
+    
+    // LUC_SAT có số 0
+    LUC_SAT_ZERO: {
+        name: "Lục Sát hoa hung",
+        description: "Lục Sát có số 0: U buồn tình cảm, ly thân/ly hôn, mất tiền cho nữ nhân",
+        detailedDescription: `Kinh nghiệm bản thân tốt, nhân duyên tốt, nhất là với người khác phái, am hiểu giao tiếp.
+- Tình cảm dễ gặp trắc trở, u buồn, không như ý.
+- Nguy cơ cao về đổ vỡ hôn nhân, chia tay, ly thân.
+- Cẩn thận khi cho nữ giới vay tiền hoặc đầu tư vào dự án của phụ nữ.
+- Có thể mất tiền vì các mối quan hệ tình cảm hoặc với phụ nữ.
+- Tâm trạng dễ u uất, tự kỷ, trầm cảm khi gặp vấn đề về tình cảm.`,
+        numbers: ["106", "160", "601", "610", "407", "470", "704", "740",
+                  "308", "380", "803", "830", "209", "290", "902", "920"],
+        energy: {
+            "160": 4.5, "610": 4.5, // Mức năng lượng cao nhất
+            "106": 4, "601": 4, // Mức năng lượng cao nhất
+            "470": 3.5, "740": 3.5,
+            "407": 3, "704": 3,  // Mức năng lượng cao
+            "380": 2.5, "830": 2.5,  // Mức năng lượng trung bình
+            "308": 2, "803": 2,  // Mức năng lượng trung bình
+            "290": 1.5, "920": 1.5,   // Mức năng lượng thấp
+            "209": 1, "902": 1   // Mức năng lượng thấp
+        },
+        nature: "Hung hóa hung" // Năng lượng Hung mạnh hơn
     },
     
     NGU_QUY: {
         name: "Ngũ Quỷ",
-        description: "Bất ổn, thay đổi, không kiên định",
-        detailedDescription: `Tính cách hay thay đổi, không kiên định, khó dự đoán.
-- Thường xuyên thay đổi ý kiến, quyết định, kế hoạch.
-- Dễ bị người khác ảnh hưởng, thiếu chủ kiến vững vàng.
-- Thích khám phá, tìm hiểu những điều mới lạ nhưng thiếu kiên trì.
-- Sự nghiệp: hay thay đổi công việc, khó ổn định lâu dài.
-- Tình cảm: dễ thay đổi cảm xúc, khó duy trì mối quan hệ lâu dài.
-- Tài chính: thu nhập không ổn định, hay có những khoản chi bất ngờ.`,
+        description: "Trí óc, biến động, không ổn định, tư duy",
+        detailedDescription: `Thông minh, đa nghĩ, phản ứng nhanh, rất tài hoa hơn người, nhiều tài năng trời phú.
+- Tài vận: buôn bán, tâm linh tôn giáo là hợp lý.
+- Sự nghiệp: thường xuyên biến động, không chịu an phận, nên đi nhiều và làm các công việc buôn bán.
+- Tình cảm: Hay thay đổi, hay có tình tay ba, dễ ngoại tình, ly hôn. Tính cách rất đa nghi, không tin tưởng ai và không tâm sự cho ai.
+- Sức khỏe: dễ có bệnh tim, tuần hoàn máu, tai ương ngoài ý muốn. Bệnh tật rất dễ bộc phát, khi phát ra thì nặng.
+- Vì bản tình hay nghi ngờ, không tin người nên rất thiếu quý nhân.
+- Quản lý tài sản: quản lý rất mờ ám, công việc nếu có liên quan đến tiền thì khá ám muội.
+- Đối với ngũ quỷ phải hoàn toàn tán đồng, lắng nghe và tôn trọng, nếu không kiên nhẫn hoặc gây trở ngại sẽ bị phản ứng ngược lại.
+- Học tập: phản ứng nhanh nhẹn, có khả năng suy luận, có năng lực cực mạnh trong phương diện thưởng thức nghệ thuật.`,
         numbers: ["18", "81", "79", "97", "36", "63", "24", "42"],
         energy: {
             "18": 4, "81": 4,  // Mức năng lượng cao nhất
@@ -178,40 +337,89 @@ export const BAT_TINH = {
             "24": 1, "42": 1   // Mức năng lượng thấp
         },
         level: {
-            HIGH: ["18", "81", "79", "97"], // Động số (năng lượng 3,4)
-            LOW: ["36", "63", "24", "42"]   // Tĩnh số (năng lượng 1,2)
+            HIGH: ["18", "81", "79", "97"], // Năng lượng 3,4
+            LOW: ["36", "63", "24", "42"]   // Năng lượng 1,2
         },
-        position: "Không nên có",
-        nature: "Hung"
+        nature: "Hung" // Inauspicious
+    },
+    
+    // NGU_QUY có số 0
+    NGU_QUY_ZERO: {
+        name: "Ngũ Quỷ hoa hung",
+        description: "Ngũ Quỷ có số 0: Hay có tiêu cực, áp lực, thăng trầm biến động, dễ mất tiền",
+        detailedDescription: `Thông minh, đa nghĩ, phản ứng nhanh, rất tài hoa hơn người, nhiều tài năng trời phú.
+- Thường xuyên gặp trở ngại, khó khăn bất ngờ trong cuộc sống và công việc.
+- Tâm trạng thường không ổn định, dễ bị căng thẳng, áp lực, bi quan.
+- Có nguy cơ cao về tai nạn, mất mát tài sản, đầu tư thất bại.
+- Tư duy tiêu cực, lo lắng quá mức, dễ dẫn đến các quyết định sai lầm.
+- Không nên đầu tư mạo hiểm, dễ gặp rủi ro lớn.`,
+        numbers: ["108", "180", "801", "810", "709", "790", "907", "970",
+                  "306", "360", "603", "630", "204", "240", "402", "420"],
+        energy: {
+            "180": 4.5, "810": 4.5, // Mức năng lượng cao nhất (tiêu cực)
+            "108": 4, "801": 4, // Mức năng lượng cao nhất (tiêu cực)
+            "790": 3.5, "970": 3.5,
+            "709": 3, "907": 3,  // Mức năng lượng cao
+            "360": 2.5, "630": 2.5,  // Mức năng lượng trung bình
+            "306": 2, "603": 2,  // Mức năng lượng trung bình
+            "240": 1.5, "420": 1.5,   // Mức năng lượng thấp
+            "204": 1, "402": 1   // Mức năng lượng thấp
+        },
+        nature: "Hung hóa hung" // Năng lượng hung cực mạnh
     },
     
     TUYET_MENH: {
         name: "Tuyệt Mệnh",
-        description: "Khó khăn, thử thách, cực đoan",
-        detailedDescription: `Gặp nhiều khó khăn, thử thách lớn trong cuộc sống.
-- Thường phải đối mặt với những tình huống cực đoan, khó xử.
-- Có sức chịu đựng tốt, vượt qua khó khăn nhờ ý chí mạnh mẽ.
-- Dễ gặp tai nạn, bệnh tật, những biến cố bất ngờ.
-- Tuy nhiên nếu vượt qua được thử thách sẽ có thành tựu lớn.
-- Sự nghiệp: gặp nhiều trở ngại nhưng có thể đạt được thành công nhờ kiên trì.
-- Sức khỏe: cần đặc biệt chú ý an toàn, tránh tai nạn.
-- Tình cảm: mối quan hệ thường trải qua nhiều thăng trầm.`,
-        numbers: ["12", "21", "69", "96", "37", "73", "48", "84"],
+        description: "Dốc sức, đầu tư, hành động, phá tài",
+        detailedDescription: `Phản ứng nhanh, sự nhạy cảm rất mạnh mẽ, tâm địa mềm mỏng và thiện lương, rất dễ tin người.
+- Dám mạo hiểm, có chí phấn đấu cố gắng. Tính cách thẳng thắn, trọng tình nghĩa, dễ kích động, rất nỗ lực phấn đấu.
+- Thích đầu tư, dễ có tài sản cố định nhưng thiếu tài sản, đầu tư cẩn thận mất mát.
+- Có sức phán đoán nhạy cảm, cần nhận được sự tán đồng, cá tính xung động, táo bạo, mạo hiểm, kiên trì.
+- Khuyết điểm: Rất dễ tin người, Không giữ được tiền, dễ bị mất của, phá tài. Tính tình bảo thủ, tự cho mình là nhất.
+- Tài vận: Không giữ được tiền, xuất tiền nhanh, dễ phá của phá tài, cần người hỗ trợ giữ tiền.
+- Sự nghiệp: Làm về đầu tư tài chính, liều lĩnh, cổ phiếu hoặc tự mình lập nghiệp, mạo hiểm.
+- Tình cảm: Dũng cảm đòi hỏi, nhưng sự cân bằng và cân đối kém, nên bất lợi cho hôn nhân, dễ ly hôn.
+- Sức khỏe: Bệnh gan, thận, tiểu đường, tai nạn xe cộ, chết ngoài ý muốn, ung thư.
+- Không có quý nhân tương trợ, mọi thứ tự thân, dễ có kiện cáo, dính dáng đến tranh chấp, hoặc hầu toà.`,
+        numbers: ["12", "21", "69", "96", "84", "48", "73", "37"],
         energy: {
             "12": 4, "21": 4,  // Mức năng lượng cao nhất
             "69": 3, "96": 3,  // Mức năng lượng cao
-            "37": 2, "73": 2,  // Mức năng lượng trung bình
-            "48": 1, "84": 1   // Mức năng lượng thấp
+            "84": 2, "48": 2,  // Mức năng lượng trung bình
+            "73": 1, "37": 1   // Mức năng lượng thấp
         },
         level: {
-            HIGH: ["12", "21", "69", "96"], // Động số (năng lượng 3,4)
-            LOW: ["37", "73", "48", "84"]   // Tĩnh số (năng lượng 1,2)
+            HIGH: ["12", "21", "69", "96"], // Năng lượng 3,4
+            LOW: ["84", "48", "73", "37"]   // Năng lượng 1,2
         },
-        position: "Không nên có",
-        nature: "Hung"
+        nature: "Hung" // Inauspicious
+    },
+    
+    // TUYET_MENH có số 0
+    TUYET_MENH_ZERO: {
+        name: "Tuyệt Mệnh hoa hung",
+        description: "Tuyệt Mệnh có số 0: Đầu tư thất bại, bệnh dễ phát nặng, dễ có tai nạn xe cộ",
+        detailedDescription: `Phản ứng nhanh, sự nhạy cảm rất mạnh mẽ, tâm địa mềm mỏng và thiện lương, rất dễ tin người.
+- Sức khỏe dễ gặp vấn đề nghiêm trọng, bệnh tật nặng.
+- Đầu tư thường mang lại kết quả không tốt, thua lỗ.
+- Cần đặc biệt chú ý khi tham gia giao thông vì nguy cơ tai nạn cao.
+- Nếu là nữ, có thể gặp khó khăn trong việc mang thai hoặc nuôi dạy con cái.
+- Tiền bạc tiêu hao nhanh, khó tích lũy, dễ mất tài sản lớn.`,
+        numbers: ["102", "120", "201", "210", "609", "690", "906", "960",
+                  "408", "480", "804", "840", "307", "370", "703", "730"],
+        energy: {
+            "120": 4.5, "210": 4.5, // Mức năng lượng cao nhất (tiêu cực)
+            "102": 4, "201": 4, // Mức năng lượng cao nhất (tiêu cực)
+            "690": 3.5, "960": 3.5,
+            "609": 3, "906": 3,  // Mức năng lượng cao
+            "480": 2.5, "840": 2.5,  // Mức năng lượng trung bình
+            "408": 2, "804": 2,  // Mức năng lượng trung bình
+            "370": 1.5, "730": 1.5,   // Mức năng lượng thấp
+            "307": 1, "703": 1   // Mức năng lượng thấp
+        },
+        nature: "Hung hóa hung" // Năng lượng hung cực mạnh
     }
 };
-
 // Helper function to get star info by pair
 export function getStarInfoForPair(pair) {
     for (const starKey in BAT_TINH) {
@@ -223,7 +431,7 @@ export function getStarInfoForPair(pair) {
                 description: starData.description,
                 detailedDescription: starData.detailedDescription,
                 nature: starData.nature,
-                energy: starData.energy[pair] || null,
+                energy: starData.energy ? starData.energy[pair] || null : null,
                 position: starData.position
             };
         }

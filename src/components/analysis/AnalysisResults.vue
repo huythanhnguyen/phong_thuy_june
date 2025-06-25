@@ -1,7 +1,7 @@
 <template>
   <div class="analysis-results">
     <!-- Overall Score Section -->
-    <div class="overall-score bg-white rounded-lg shadow-md p-6 mb-6">
+    <div class="overall-score bg-white rounded-lg shadow-md p-6 mb-6" v-if="showScore">
       <div class="flex flex-col md:flex-row items-center justify-center gap-6">
         <!-- Score Circle -->
         <div class="score-circle relative">
@@ -95,36 +95,27 @@
       />
     </div>
 
-    <!-- Recommendations -->
-    <div class="recommendations">
-      <AnalysisCard 
-        title="Khuyến Nghị"
-        icon="💡"
-        :content="result.recommendations"
-        type="recommendations"
-      />
-    </div>
+    <!-- Additional Analysis for CCCD -->
+    <div v-if="type === 'cccd'" class="grid grid-cols-1 gap-6 mb-6">
 
-    <!-- Action Buttons -->
-    <div class="action-buttons flex flex-wrap justify-center gap-4 mt-6">
-      <button 
-        @click="shareResult"
-        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        📤 Chia Sẻ
-      </button>
-      <button 
-        @click="downloadResult"
-        class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-      >
-        💾 Tải Về
-      </button>
-      <button 
-        @click="analyzeNew"
-        class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-      >
-        🔄 Phân Tích Mới
-      </button>
+
+      <!-- Characteristics -->
+      <AnalysisCard 
+        v-if="result.characteristics"
+        title="Đặc Tính Bẩm Sinh"
+        icon="🧬"
+        :content="result.characteristics"
+        type="characteristics"
+      />
+
+      <!-- Remedy Notes -->
+      <AnalysisCard 
+        v-if="result.remedyNotes"
+        title="Ghi Chú Hóa Giải"
+        icon="🛡️"
+        :content="result.remedyNotes"
+        type="remedy-notes"
+      />
     </div>
   </div>
 </template>
@@ -146,11 +137,15 @@ const props = defineProps({
   inputValue: {
     type: String,
     required: true
+  },
+  showScore: {
+    type: Boolean,
+    default: true
   }
 });
 
-// Emits
-const emit = defineEmits(['analyze-new']);
+// Emits - không còn cần thiết
+// const emit = defineEmits(['analyze-new']);
 
 // Computed
 const getCircleProgress = () => {
@@ -195,46 +190,8 @@ const getOverallDescription = () => {
   return "Số này có năng lượng rất kém, nên tránh sử dụng.";
 };
 
-const shareResult = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: 'Kết Quả Phân Tích Phong Thủy Số Học',
-      text: `Số ${props.inputValue} có điểm phong thủy ${props.result.overallScore}/100`,
-      url: window.location.href
-    });
-  } else {
-    // Fallback to clipboard
-    const text = `Số ${props.inputValue} có điểm phong thủy ${props.result.overallScore}/100 - ${props.result.summary}`;
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Đã sao chép kết quả vào clipboard!');
-    });
-  }
-};
-
-const downloadResult = () => {
-  const data = {
-    number: props.inputValue,
-    type: props.type,
-    score: props.result.overallScore,
-    summary: props.result.summary,
-    recommendations: props.result.recommendations,
-    analyzedAt: new Date().toISOString()
-  };
-  
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `phan-tich-${props.inputValue}-${Date.now()}.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-};
-
-const analyzeNew = () => {
-  emit('analyze-new');
-};
+// Removed shareResult, downloadResult, analyzeNew methods
+// No longer needed after removing action buttons
 </script>
 
 <style scoped>

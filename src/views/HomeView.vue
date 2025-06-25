@@ -96,27 +96,27 @@
     <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12">Ứng Dụng Trong Cuộc Sống</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <router-link to="/guides/chon-so-dien-thoai" class="feature-card cursor-pointer">
             <div class="feature-icon">
               <font-awesome-icon icon="mobile-alt" />
             </div>
             <h3 class="feature-title">Số Điện Thoại</h3>
-            <p class="feature-description">Phân tích từng cặp số để tìm ra sự cân bằng giữa các sao tốt xấu, giúp thu hút tài lộc, quý nhân và cơ hội nghề nghiệp.</p>
+            <p class="feature-description hidden sm:block">Phân tích từng cặp số để tìm ra sự cân bằng giữa các sao tốt xấu, giúp thu hút tài lộc, quý nhân và cơ hội nghề nghiệp.</p>
           </router-link>
           <router-link to="/guides/can-cuoc-cong-dan" class="feature-card cursor-pointer">
             <div class="feature-icon">
               <font-awesome-icon icon="id-card" />
             </div>
             <h3 class="feature-title">Căn Cước Công Dân</h3>
-            <p class="feature-description">Khám phá mã số định danh của bạn có ảnh hưởng gì đến vận mệnh, sự nghiệp và đường đời từ góc nhìn số học.</p>
+            <p class="feature-description hidden sm:block">Khám phá mã số định danh của bạn có ảnh hưởng gì đến vận mệnh, sự nghiệp và đường đời từ góc nhìn số học.</p>
           </router-link>
           <router-link to="/guides/mat-khau" class="feature-card cursor-pointer">
             <div class="feature-icon">
               <font-awesome-icon icon="key" />
             </div>
             <h3 class="feature-title">Mật Khẩu</h3>
-            <p class="feature-description">Tạo mật khẩu vừa bảo mật vừa mang lại may mắn theo nguyên lý phong thủy số học. 
+            <p class="feature-description hidden sm:block">Tạo mật khẩu vừa bảo mật vừa mang lại may mắn theo nguyên lý phong thủy số học. 
               Áp dụng cho tài khoản ngân hàng, email, mạng xã hội.</p>
           </router-link>
           <router-link to="/guides/chon-so-ngan-hang" class="feature-card cursor-pointer">
@@ -124,194 +124,23 @@
               <font-awesome-icon icon="credit-card" />
             </div>
             <h3 class="feature-title">Số Tài Khoản</h3>
-            <p class="feature-description">Lựa chọn số tài khoản ngân hàng phù hợp để thu hút tài lộc, thịnh vượng và thuận lợi trong giao dịch tài chính.</p>
+            <p class="feature-description hidden sm:block">Lựa chọn số tài khoản ngân hàng phù hợp để thu hút tài lộc, thịnh vượng và thuận lợi trong giao dịch tài chính.</p>
           </router-link>
         </div>
       </div>
     </section>
 
-    <!-- Những Điều Bạn Nên Biết Section - MỚI -->
-    <section class="py-16 bg-white">
+    <!-- Phân Tích Nhanh - nhúng UniversalAnalysis -->
+    <section class="py-16 bg-gray-50" id="quick-analysis">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Những Điều Bạn Nên Biết</h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-primary-light p-6 rounded-lg">
-            <h3 class="text-xl font-bold mb-4 text-primary">Các cặp số quan trọng</h3>
-            <div class="grid grid-cols-2 gap-3 mb-6">
-              <div class="bg-white p-3 rounded shadow-sm">
-                <span class="font-bold text-green-600 block">Thiên Y (Cát): </span>
-                <span class="text-sm text-gray-600">13, 31, 68, 86, 49, 94, 27, 72</span>
-              </div>
-              <div class="bg-white p-3 rounded shadow-sm">
-                <span class="font-bold text-green-600 block">Sinh Khí (Cát): </span>
-                <span class="text-sm text-gray-600">14, 41, 67, 76, 39, 93, 28, 82</span>
-              </div>
-              <div class="bg-white p-3 rounded shadow-sm">
-                <span class="font-bold text-red-600 block">Tuyệt Mệnh (Hung): </span>
-                <span class="text-sm text-gray-600">12, 21, 69, 96, 48, 84, 37, 73</span>
-              </div>
-              <div class="bg-white p-3 rounded shadow-sm">
-                <span class="font-bold text-red-600 block">Ngũ Quỷ (Hung): </span>
-                <span class="text-sm text-gray-600">18, 81, 79, 97, 36, 63, 24, 42</span>
-              </div>
-            </div>
-            <p class="text-sm text-gray-700">
-              * Đây chỉ là một phần trong hệ thống 8 sao (Tứ Cát Tứ Hung)
-            </p>
-          </div>
-          
-          <div class="bg-gray-50 p-6 rounded-lg">
-            <h3 class="text-xl font-bold mb-4">Cách Phân Tích Dãy Số</h3>
-            <ol class="list-decimal pl-6 space-y-3">
-              <li class="text-gray-700">
-                <span class="font-semibold">Chia dãy số thành các cặp liền kề</span>
-                <p class="text-sm text-gray-600">Ví dụ: 0912345678 → 09, 91, 12, 23, 34, 45, 56, 67, 78</p>
-              </li>
-              <li class="text-gray-700">
-                <span class="font-semibold">Xác định mỗi cặp thuộc loại sao nào</span>
-                <p class="text-sm text-gray-600">Dựa vào bảng đối chiếu 64 cặp số với 8 loại sao</p>
-              </li>
-              <li class="text-gray-700">
-                <span class="font-semibold">Đánh giá tỷ lệ cát/hung</span>
-                <p class="text-sm text-gray-600">Tốt nhất là cân bằng (50/50) hoặc thiên về cát</p>
-              </li>
-              <li class="text-gray-700">
-                <span class="font-semibold">Xem xét vị trí trong dãy số</span>
-                <p class="text-sm text-gray-600">3 số cuối quan trọng nhất, ảnh hưởng trực tiếp đến hiện tại</p>
-              </li>
-            </ol>
-          </div>
+        <h2 class="text-3xl font-bold text-center mb-8">Phân Tích Nhanh</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <UniversalAnalysis />
         </div>
       </div>
     </section>
 
-<!-- Demo Chat Section -->
-<section id="demo-chat" class="py-16 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center mb-4">Phân Tích Tổng Hợp</h2>
-    <p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-      Trải nghiệm công cụ phân tích đa dạng - từ số điện thoại, CCCD đến ngày sinh và mật khẩu số!
-    </p>
-    
-    <div class="text-center mb-10">
-      <router-link to="/universal-analysis" class="btn-primary inline-block py-3 px-8 text-lg font-semibold">
-        Khám Phá Ngay →
-      </router-link>
-    </div>
-    
-    <div class="max-w-2xl mx-auto">
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <!-- Chat Messages -->
-        <div class="h-80 overflow-y-auto p-4 bg-gray-50" ref="chatContainer">
-          <div class="mb-4 max-w-[80%] rounded-lg p-3 bg-white shadow-sm ml-0 mr-auto">
-            Xin chào! Tôi là trợ lý phân tích Bát Cục Linh Số. Bạn có thể nhập số điện thoại để phân tích ngay.
-          </div>
-          
-          <div v-for="(message, index) in chatMessages" :key="index" 
-            :class="['mb-4 max-w-[80%] rounded-lg p-3', 
-              message.isUser ? 'bg-primary-light mr-0 ml-auto' : 'bg-white shadow-sm ml-0 mr-auto'
-            ]">
-            <div v-if="message.isUser">{{ message.content }}</div>
-            <div v-else v-html="message.content"></div>
-          </div>
-          
-          <div v-if="isTyping" class="flex space-x-2 p-3 bg-white shadow-sm rounded-lg ml-0 mr-auto mb-4 w-16">
-            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
-          </div>
-        </div>
-        
-        <!-- Chat Input -->
-        <div class="border-t border-gray-200 p-4">
-          <div class="flex">
-            <input
-              type="text"
-              v-model="userInput"
-              class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Nhập số điện thoại để phân tích..."
-              @keyup.enter="sendMessage"
-              :disabled="isTyping || hasAnalyzed"
-            />
-            <button
-              @click="sendMessage"
-              class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary-dark"
-              :disabled="!userInput.trim() || isTyping || hasAnalyzed"
-            >
-              <font-awesome-icon icon="paper-plane" />
-            </button>
-          </div>
-          <p v-if="hasAnalyzed" class="text-xs text-red-500 mt-2">
-            Bạn đã sử dụng lượt phân tích miễn phí. Vui lòng đăng nhập để tiếp tục!
-          </p>
-          <p v-else class="text-xs text-gray-500 mt-2">
-            Nhập số điện thoại của bạn (VD: 0912345678) để nhận phân tích cơ bản.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- FAQ Section -->
-    <section class="py-16 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Câu hỏi thường gặp</h2>
-        
-        <div class="max-w-3xl mx-auto space-y-4">
-          <div class="bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center cursor-pointer">
-              <h3 class="text-lg font-semibold">Phương pháp Tứ Cát Tứ Hung là gì?</h3>
-              <font-awesome-icon icon="chevron-down" class="text-gray-500" />
-            </div>
-            <div class="mt-4 text-gray-600">
-              Phương pháp Tứ Cát Tứ Hung là cách phân tích số học dựa trên Kinh Dịch cổ đại, phân chia 64 cặp số thành 8 loại sao (4 cát tinh mang năng lượng tích cực và 4 hung tinh mang năng lượng thách thức). Mỗi cặp số tạo nên rung động năng lượng riêng, ảnh hưởng đến vận mệnh của người sử dụng.
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center cursor-pointer">
-              <h3 class="text-lg font-semibold">Làm thế nào để chọn số điện thoại hợp phong thủy?</h3>
-              <font-awesome-icon icon="chevron-down" class="text-gray-500" />
-            </div>
-            <div class="mt-4 text-gray-600">
-              Để chọn số điện thoại hợp phong thủy, cần phân tích dãy số thành các cặp số liền kề và đánh giá theo nguyên lý Tứ Cát Tứ Hung. Một số điện thoại tốt nên có tỷ lệ cân bằng giữa cát hung (50/50) hoặc thiên về cát. Đặc biệt chú ý đến 3 số cuối cùng, vì chúng ảnh hưởng trực tiếp đến hiện tại. Nên có các cặp số thuộc sao Thiên Y, Sinh Khí và tránh các cặp thuộc Tuyệt Mệnh, Ngũ Quỷ.
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center cursor-pointer">
-              <h3 class="text-lg font-semibold">Tại sao biển số xe lại quan trọng trong Bát Cục Linh Số?</h3>
-              <font-awesome-icon icon="chevron-down" class="text-gray-500" />
-            </div>
-            <div class="mt-4 text-gray-600">
-              Biển số xe đặc biệt quan trọng vì nó là con số bạn tiếp xúc hàng ngày trong suốt thời gian sở hữu xe. Theo Bát Cục Linh Số, biển số xe phù hợp có thể giúp tránh tai nạn, sự cố và mang lại may mắn trong di chuyển. Đặc biệt đối với người thường xuyên lái xe, biển số có thể tạo lá chắn bảo vệ hoặc ngược lại, làm tăng nguy cơ rủi ro. Một biển số tốt cũng có thể hỗ trợ sự nghiệp và tài lộc cho chủ xe.
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center cursor-pointer">
-              <h3 class="text-lg font-semibold">Số CCCD có thực sự ảnh hưởng đến vận mệnh không?</h3>
-              <font-awesome-icon icon="chevron-down" class="text-gray-500" />
-            </div>
-            <div class="mt-4 text-gray-600">
-              Số CCCD ảnh hưởng đến vận mệnh vì đây là dãy số định danh gắn liền với bạn trong suốt cuộc đời. Trong Bát Cục Linh Số, mỗi dãy số đều mang năng lượng riêng và tương tác với từ trường của chủ nhân. Số CCCD tạo một "dấu ấn số học" đặc trưng, có thể hỗ trợ hoặc cản trở trong các khía cạnh cuộc sống như sự nghiệp, tài chính, các mối quan hệ. Dù không thể thay đổi số CCCD, nhưng hiểu được ý nghĩa của nó giúp bạn điều chỉnh các yếu tố khác để cân bằng.
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-sm p-4">
-            <div class="flex justify-between items-center cursor-pointer">
-              <h3 class="text-lg font-semibold">Tôi có thể thay đổi số nào để cải thiện vận mệnh?</h3>
-              <font-awesome-icon icon="chevron-down" class="text-gray-500" />
-            </div>
-            <div class="mt-4 text-gray-600">
-              Bạn có thể thay đổi số điện thoại, số tài khoản ngân hàng và biển số xe (trong khả năng cho phép) để cải thiện vận mệnh. Đây là những dãy số bạn có quyền lựa chọn và thường xuyên sử dụng. Số điện thoại đặc biệt quan trọng vì bạn tiếp xúc với nó hàng ngày, ảnh hưởng trực tiếp đến công việc, mối quan hệ. Số tài khoản ngân hàng có thể tác động đến tài lộc, còn biển số xe ảnh hưởng đến sự an toàn và vận may trong di chuyển. Ngoài ra, bạn cũng nên chú ý đến số nhà, căn hộ khi có điều kiện chọn lựa.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- FAQ Section removed -->
 
     <!-- CTA -->
     <section class="py-16 bg-primary text-white text-center">
@@ -359,6 +188,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Header from '@/components/layout/Header.vue'
 import Footer from '@/components/layout/Footer.vue'
+import UniversalAnalysis from './UniversalAnalysis.vue'
 
 // Thêm các icon cần thiết
 library.add(
@@ -464,15 +294,18 @@ const formatAnalysisResult = (data) => {
       }</p>`;
     }
     
-    // Phân tích cặp số cuối
-    if (analysisData.starSequence && analysisData.starSequence.length > 0) {
-      // Lấy cặp số cuối cùng để phân tích
-      const lastStar = analysisData.starSequence[analysisData.starSequence.length - 1];
-      const starClass = lastStar.nature === 'Cát' ? 'text-green-600' : 'text-red-600';
-      
-      content += `<p class="mb-1">• Cặp số cuối: <span class="font-medium">${lastStar.originalPair || ''}</span> - 
-        <span class="${starClass} font-semibold">${lastStar.name || ''}</span> 
-        (${lastStar.nature === 'Cát' ? 'Cát tinh' : 'Hung tinh'})</p>`;
+    // Ý nghĩa từng số (chỉ 3 vị trí)
+    if (analysisData.keyPositions) {
+      const kp = analysisData.keyPositions;
+      if (kp.lastDigit) {
+        content += `<p class="mb-1">• Số cuối (<strong>${kp.lastDigit.value}</strong>): ${kp.lastDigit.meaning}</p>`;
+      }
+      if (kp.thirdFromEnd) {
+        content += `<p class="mb-1">• Số thứ 3 từ cuối (<strong>${kp.thirdFromEnd.value}</strong>): ${kp.thirdFromEnd.meaning}</p>`;
+      }
+      if (kp.fifthFromEnd) {
+        content += `<p class="mb-1">• Số thứ 5 từ cuối (<strong>${kp.fifthFromEnd.value}</strong>): ${kp.fifthFromEnd.meaning}</p>`;
+      }
     }
     
     // Thêm một phần trích dẫn từ phân tích (nếu có)

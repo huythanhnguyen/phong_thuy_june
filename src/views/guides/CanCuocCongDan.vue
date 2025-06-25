@@ -141,6 +141,7 @@
       <div v-if="displayAnalysis" id="analysis-results" class="mb-12 bg-white p-6 rounded-lg shadow-md border border-gray-200">
         <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Kết Quả Phân Tích CCCD</h2>
         
+        <!-- Thông tin cơ bản -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div class="bg-blue-50 p-4 rounded-lg">
             <h3 class="font-semibold mb-2 text-blue-800">Số CCCD gốc</h3>
@@ -156,63 +157,99 @@
           </div>
         </div>
         
+        <!-- Điểm tổng thể -->
+        <!-- Điểm tổng thể -->
+
+        
+        <!-- Phân tích các cặp số -->
         <div class="mb-8">
-          <h3 class="text-xl font-bold mb-4 text-gray-800">Các cặp số và ý nghĩa</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div v-for="pair in displayAnalysis.analysis.individualPairs" :key="pair.pairNumber"
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Phân Tích Các Cặp Số</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div v-for="pair in displayAnalysis.pairsAnalysis" :key="pair.pairNumber"
                  :class="[
                   'p-4 rounded-lg shadow-sm border-l-4',
-                  pair.nature.includes('Cát') ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'
+                  pair.nature === 'Cát' ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'
                 ]">
               <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold">Cặp {{ pair.digits }}</span>
+                <span class="text-lg font-bold font-mono">{{ pair.digits }}</span>
                 <span :class="[
                   'px-2 py-1 rounded-full text-xs font-semibold',
-                  pair.nature.includes('Cát') ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
+                  pair.nature === 'Cát' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
                 ]">
                   {{ pair.nature }}
                 </span>
               </div>
-              <p class="mb-1"><span class="font-semibold">Sao:</span> {{ pair.star }}</p>
-              <p class="mb-1"><span class="font-semibold">Ý nghĩa:</span> {{ pair.meaning }}</p>
-              <p><span class="font-semibold">Năng lượng:</span> 
-                <span class="flex mt-1">
-                  <span v-for="n in 5" :key="n" 
+              <p class="mb-2"><span class="font-semibold">Sao:</span> {{ pair.star }}</p>
+              <p class="mb-2 text-sm">{{ pair.meaning }}</p>
+              <div v-if="pair.energyLevel" class="flex items-center">
+                <span class="text-sm mr-2">Năng lượng:</span>
+                <div class="flex">
+                  <div v-for="n in 4" :key="n" 
                         :class="[
-                          'w-3 h-3 rounded-full mr-1', 
+                         'w-2 h-2 rounded-full mr-1',
                           n <= pair.energyLevel ? 
-                            (pair.nature.includes('Cát') ? 'bg-green-500' : 'bg-red-500') : 
+                           (pair.nature === 'Cát' ? 'bg-green-500' : 'bg-red-500') : 
                             'bg-gray-200'
                         ]">
-                  </span>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="mb-8">
-          <h3 class="text-xl font-bold mb-4 text-gray-800">Tổ hợp sao</h3>
-          <div class="space-y-4">
-            <div v-for="(combination, index) in displayAnalysis.analysis.starCombinations" :key="index"
-                class="bg-indigo-50 p-5 rounded-lg shadow-sm border border-indigo-200">
-              <h4 class="font-bold text-lg mb-2 text-indigo-800">{{ combination.stars }}</h4>
-              <p class="mb-3 text-gray-700">{{ combination.meaning }}</p>
-              <div class="bg-white p-3 rounded-md">
-                <h5 class="font-semibold mb-2 text-gray-700">Chi tiết:</h5>
-                <ul class="list-disc pl-5 space-y-1 text-gray-600">
-                  <li v-for="(detail, detailIndex) in combination.details" :key="detailIndex">
-                    {{ detail }}
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
         
-        <div class="bg-gray-50 p-4 rounded-lg">
-          <h3 class="font-bold mb-2 text-gray-800">Tổng Quan</h3>
-          <p>{{ displayAnalysis.analysis.overallSummary }}</p>
+        <!-- Đặc tính bẩm sinh -->
+        <div v-if="displayAnalysis.characteristics" class="mb-8">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Đặc Tính Bẩm Sinh</h3>
+          <div class="space-y-4">
+            <div v-for="(characteristic, index) in displayAnalysis.characteristics" :key="index" 
+                 class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border-l-4 border-blue-400">
+              <h4 class="font-semibold text-blue-800 mb-2">{{ characteristic.category }}</h4>
+              <p class="text-gray-700 text-sm leading-relaxed">{{ characteristic.description }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Ghi chú hóa giải -->
+        <div v-if="displayAnalysis.remedyNotes" class="mb-8">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Ghi Chú Hóa Giải</h3>
+          <div class="space-y-4">
+            <div v-for="(note, index) in displayAnalysis.remedyNotes" :key="index" 
+                 :class="[
+                   'p-4 rounded-lg border-l-4',
+                   note.type === 'info' ? 'bg-blue-50 border-blue-400' :
+                   note.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
+                   note.type === 'remedy' ? 'bg-green-50 border-green-400' :
+                   'bg-gray-50 border-gray-400'
+                 ]">
+              <div class="flex items-start">
+                <span :class="[
+                  'mr-3 mt-1',
+                  note.type === 'info' ? 'text-blue-500' :
+                  note.type === 'warning' ? 'text-yellow-500' :
+                  note.type === 'remedy' ? 'text-green-500' :
+                  'text-gray-500'
+                ]">
+                  {{ note.type === 'info' ? 'ℹ️' : 
+                     note.type === 'warning' ? '⚠️' : 
+                     note.type === 'remedy' ? '💊' : '📝' }}
+                </span>
+                <div class="flex-1">
+                  <h4 :class="[
+                    'font-semibold mb-2',
+                    note.type === 'info' ? 'text-blue-800' :
+                    note.type === 'warning' ? 'text-yellow-800' :
+                    note.type === 'remedy' ? 'text-green-800' :
+                    'text-gray-800'
+                  ]">
+                    {{ note.title }}
+                    <span v-if="note.starCount" class="text-sm font-normal opacity-75">({{ note.starCount }} cặp)</span>
+                  </h4>
+                  <p class="text-gray-700 text-sm leading-relaxed">{{ note.content }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -228,7 +265,7 @@ import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import Header from '@/components/layout/Header.vue';
 import Footer from '@/components/layout/Footer.vue';
-import DetailedAnalysis from '@/components/analysis/DetailedAnalysis.vue';
+import { UniversalAnalysisEngine } from '@/utils/analysisEngine.js';
 
 const router = useRouter();
 
@@ -256,21 +293,14 @@ const analyzeCCCD = async () => {
   displayAnalysis.value = null;
 
   try {
-    const response = await fetch('https://chatbotsdtapi.onrender.com/api/cccd/analyze-cccd', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ cccdNumber: cccd.value })
-    });
+    // Sử dụng logic phân tích mới từ UniversalAnalysisEngine
+    const result = UniversalAnalysisEngine.analyze(cccd.value, 'cccd');
 
-    if (!response.ok) {
-      const data = await response.json(); // Parse error response
-      throw new Error('Failed to analyze CCCD: ' + data.message);
+    if (result.error) {
+      throw new Error(result.error);
     }
 
-    const data = await response.json();
-    displayAnalysis.value = data.data;
+    displayAnalysis.value = result;
     
     // Scroll to results after loading
     setTimeout(() => {
@@ -280,7 +310,7 @@ const analyzeCCCD = async () => {
       }
     }, 100);
   } catch (error) {
-      cccdError.value = error.message
+      cccdError.value = error.message || 'Có lỗi xảy ra khi phân tích';
   } finally {
     loading.value = false;
   }
@@ -290,6 +320,23 @@ const analyzeCCCD = async () => {
 const navigateToLogin = () => {
   router.push({ name: 'login' })
 }
+
+// Helper methods for score display
+const getScoreColor = (score) => {
+  if (score >= 80) return 'border-green-500 text-green-600';
+  if (score >= 60) return 'border-blue-500 text-blue-600';
+  if (score >= 40) return 'border-yellow-500 text-yellow-600';
+  if (score >= 20) return 'border-orange-500 text-orange-600';
+  return 'border-red-500 text-red-600';
+};
+
+const getScoreLevel = (score) => {
+  if (score >= 80) return "Xuất Sắc";
+  if (score >= 60) return "Tốt";
+  if (score >= 40) return "Trung Bình";
+  if (score >= 20) return "Kém";
+  return "Rất Kém";
+};
 </script>
 
 <style scoped>

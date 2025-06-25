@@ -6,6 +6,11 @@
         <font-awesome-icon icon="bars" />
       </button>
       
+      <!-- Home button -->
+      <router-link to="/" class="home-btn" title="Trang chủ">
+        <font-awesome-icon icon="home" />
+      </router-link>
+      
       <!-- Dropdown menu cho các dịch vụ -->
       <div class="service-selector" :class="{ active: serviceDropdownOpen }">
         <div class="current-service" @click="toggleServiceDropdown">
@@ -281,6 +286,27 @@ onUnmounted(() => {
 
 .toggle-sidebar-btn:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* Home Button */
+.home-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.home-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
 }
 
 /* Quota info in dropdown */

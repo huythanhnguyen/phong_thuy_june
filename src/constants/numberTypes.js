@@ -30,8 +30,9 @@ export const NUMBER_TYPES = {
         description: 'Phân tích ngày sinh và vận mệnh',
         icon: 'calendar',
         examples: ['15/08/1990', '03/12/1985'],
-        inputType: 'date',
-        placeholder: 'Chọn ngày sinh của bạn...',
+        inputType: 'text',
+        placeholder: 'Nhập ngày sinh (dd/mm/yyyy)...',
+        maxLength: 10,
         validation: /^\d{2}\/\d{2}\/\d{4}$/,
         format: (value) => value
     },
@@ -54,9 +55,21 @@ export const NUMBER_TYPES = {
         icon: 'lock',
         examples: ['123456', '888999', '168168'],
         inputType: 'text',
-        maxLength: 10,
-        placeholder: 'Nhập mật khẩu số...',
-        validation: /^[0-9]{4,10}$/,
+        maxLength: 200,
+        placeholder: 'Nhập mật khẩu...',
+        validation: /^.*$/,
+        format: (value) => value
+    },
+    random: {
+        id: 'random',
+        name: 'Số Ngẫu Nhiên',
+        description: 'Phân tích chuỗi ký tự bất kỳ',
+        icon: 'dice',
+        examples: ['AB12CD', 'A1B2C3', '68XYZ56'],
+        inputType: 'text',
+        maxLength: 200,
+        placeholder: 'Nhập chuỗi bất kỳ...',
+        validation: /^.*$/,
         format: (value) => value
     }
 };
@@ -80,8 +93,23 @@ export function validateNumberInput(value, typeId) {
         return { valid: false, message: 'Vui lòng nhập số' };
     }
     
-    // Clean input (remove spaces, special chars for validation)
+    // Đối với ngày sinh, cần giữ nguyên định dạng dd/mm/yyyy để kiểm tra
+    if (typeId === 'birthdate') {
+        if (!typeInfo.validation.test(value.trim())) {
+            return {
+                valid: false,
+                message: `${typeInfo.name} không hợp lệ. ${getValidationMessage(typeId)}`
+            };
+        }
+        return { valid: true, cleanValue: value.trim() };
+    }
+
     const cleanValue = value.replace(/\D/g, '');
+
+    // Đối với mật khẩu, không giới hạn định dạng – chỉ cần không rỗng
+    if (typeId === 'password' || typeId === 'random') {
+        return { valid: true, cleanValue: value.trim() };
+    }
     
     if (!typeInfo.validation.test(cleanValue)) {
         return { 
@@ -100,7 +128,8 @@ function getValidationMessage(typeId) {
         cccd: 'Số CCCD phải có 9-12 chữ số', 
         birthdate: 'Ngày sinh phải có định dạng dd/mm/yyyy',
         bankAccount: 'Số tài khoản phải có 8-20 chữ số',
-        password: 'Mật khẩu số phải có 4-10 chữ số'
+        password: 'Mật khẩu số không hợp lệ',
+        random: 'Chuỗi không hợp lệ'
     };
     return messages[typeId] || 'Định dạng không hợp lệ';
 } 

@@ -125,6 +125,86 @@
         </div>
       </div>
 
+      <!-- Zero Analysis for CCCD -->
+      <div v-else-if="type === 'zero-analysis'" class="zero-analysis">
+        <div class="original-sequence mb-4">
+          <h4 class="font-medium text-gray-700 mb-2">Dãy số gốc (6 số cuối):</h4>
+          <span class="font-mono text-lg bg-gray-100 px-3 py-2 rounded">{{ content.originalSequence }}</span>
+        </div>
+        
+        <div v-if="content.replacements && content.replacements.length > 0" class="replacements mb-4">
+          <h4 class="font-medium text-gray-700 mb-2">Quy tắc thay thế số 0:</h4>
+          <div v-for="(replacement, index) in content.replacements" :key="index" class="replacement-item mb-2">
+            <div class="flex items-center bg-blue-50 p-3 rounded">
+              <span class="font-mono bg-red-100 text-red-700 px-2 py-1 rounded mr-2">{{ replacement.original }}</span>
+              <span class="text-gray-500 mx-2">→</span>
+              <span class="font-mono bg-green-100 text-green-700 px-2 py-1 rounded mr-3">{{ replacement.replacement }}</span>
+              <span class="text-sm text-gray-600">(Vị trí {{ replacement.position }})</span>
+            </div>
+          </div>
+        </div>
+        
+        <div v-if="content.explanation && content.explanation.length > 0" class="explanations">
+          <h4 class="font-medium text-gray-700 mb-2">Giải thích chi tiết:</h4>
+          <div v-for="(explanation, index) in content.explanation" :key="index" class="explanation-item mb-2">
+            <div class="flex items-start">
+              <span class="text-blue-500 mr-2 mt-1">ℹ️</span>
+              <p class="text-sm text-gray-600">{{ explanation }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Characteristics for CCCD -->
+      <div v-else-if="type === 'characteristics'" class="characteristics">
+        <div v-for="(characteristic, index) in content" :key="index" class="characteristic-item mb-4 last:mb-0">
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border-l-4 border-blue-400">
+            <h4 class="font-semibold text-blue-800 mb-2">{{ characteristic.category }}</h4>
+            <p class="text-gray-700 text-sm leading-relaxed">{{ characteristic.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remedy Notes for CCCD -->
+      <div v-else-if="type === 'remedy-notes'" class="remedy-notes">
+        <div v-for="(note, index) in content" :key="index" class="remedy-note mb-4 last:mb-0">
+          <div :class="[
+            'p-4 rounded-lg border-l-4',
+            note.type === 'info' ? 'bg-blue-50 border-blue-400' :
+            note.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
+            note.type === 'remedy' ? 'bg-green-50 border-green-400' :
+            'bg-gray-50 border-gray-400'
+          ]">
+            <div class="flex items-start">
+              <span :class="[
+                'mr-3 mt-1',
+                note.type === 'info' ? 'text-blue-500' :
+                note.type === 'warning' ? 'text-yellow-500' :
+                note.type === 'remedy' ? 'text-green-500' :
+                'text-gray-500'
+              ]">
+                {{ note.type === 'info' ? 'ℹ️' : 
+                   note.type === 'warning' ? '⚠️' : 
+                   note.type === 'remedy' ? '💊' : '📝' }}
+              </span>
+              <div class="flex-1">
+                <h4 :class="[
+                  'font-semibold mb-2',
+                  note.type === 'info' ? 'text-blue-800' :
+                  note.type === 'warning' ? 'text-yellow-800' :
+                  note.type === 'remedy' ? 'text-green-800' :
+                  'text-gray-800'
+                ]">
+                  {{ note.title }}
+                  <span v-if="note.starCount" class="text-sm font-normal opacity-75">({{ note.starCount }} cặp)</span>
+                </h4>
+                <p class="text-gray-700 text-sm leading-relaxed">{{ note.content }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Default text content -->
       <div v-else class="default-content">
         <p class="text-gray-700">{{ content }}</p>

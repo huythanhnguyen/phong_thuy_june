@@ -36,6 +36,7 @@
           :result="analysisResult"
           :type="selectedType"
           :input-value="inputValue"
+          :show-score="false"
         />
       </div>
 
