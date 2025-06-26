@@ -408,6 +408,70 @@ export class UniversalAnalysisEngine {
     }
     
     /**
+     * Calculate dominant stars based on total energy and frequency
+     */
+    static calculateDominantStars(pairsAnalysis) {
+        if (!pairsAnalysis || pairsAnalysis.length === 0) {
+            return [];
+        }
+
+        // Calculate total energy and frequency for each star
+        const starStats = {};
+        pairsAnalysis.forEach(pair => {
+            const starKey = pair.starKey;
+            if (!starStats[starKey]) {
+                starStats[starKey] = {
+                    starKey: starKey,
+                    star: pair.star,
+                    totalEnergy: 0,
+                    frequency: 0,
+                    detailedDescription: pair.detailedDescription
+                };
+            }
+            starStats[starKey].totalEnergy += pair.energyLevel;
+            starStats[starKey].frequency += 1;
+        });
+
+        const stars = Object.values(starStats);
+
+        // Find star with highest total energy
+        const maxEnergyStars = stars.filter(star => 
+            star.totalEnergy === Math.max(...stars.map(s => s.totalEnergy))
+        );
+
+        // Find star with highest frequency
+        const maxFrequencyStars = stars.filter(star => 
+            star.frequency === Math.max(...stars.map(s => s.frequency))
+        );
+
+        // Determine dominant stars
+        const dominantStars = [];
+        
+        // If same star has both highest energy and frequency, take only one
+        const energyStar = maxEnergyStars[0];
+        const frequencyStar = maxFrequencyStars[0];
+        
+        if (energyStar.starKey === frequencyStar.starKey) {
+            dominantStars.push({
+                ...energyStar,
+                reason: `tổng năng lượng ${energyStar.totalEnergy} và lặp ${energyStar.frequency} lần`
+            });
+        } else {
+            // Take both stars if different
+            dominantStars.push({
+                ...energyStar,
+                reason: `tổng năng lượng ${energyStar.totalEnergy}`
+            });
+            dominantStars.push({
+                ...frequencyStar,
+                reason: `lặp ${frequencyStar.frequency} lần`
+            });
+        }
+
+        return dominantStars;
+    }
+
+    /**
      * Generate summary
      */
     static generateSummary(pairsAnalysis, overallScore) {
@@ -415,28 +479,77 @@ export class UniversalAnalysisEngine {
             return "Không thể phân tích được số này.";
         }
         
-        const starSequence = pairsAnalysis.map(p => p.star).join(' → ');
-        const scoreLevel = this.getScoreLevel(overallScore);
+        const starSequence = pairsAnalysis.map(p => `${p.star} (${p.energyLevel}/4)`).join(' → ');
+        const dominantStars = this.calculateDominantStars(pairsAnalysis);
         
-        return `Phân tích ${pairsAnalysis.length} cặp số với điểm tổng thể ${overallScore}/100 (${scoreLevel}). Chuỗi sao: ${starSequence}.`;
+        let summary = `Dãy số có ${pairsAnalysis.length} cặp số ứng với chuỗi sao: ${starSequence}.`;
+        
+        // Add dominant stars section
+        if (dominantStars.length > 0) {
+            const dominantStarTexts = dominantStars.map(star => `${star.star} (${star.reason})`);
+            summary += `\n\nDãy số có chủ đạo là ${dominantStarTexts.join(' và ')}.`;
+            
+            // Add detailed descriptions
+            dominantStars.forEach(star => {
+                if (star.detailedDescription) {
+                    summary += `\n\n**${star.star}**: ${star.detailedDescription}`;
+                }
+            });
+        }
+        
+        return summary;
     }
     
     /**
      * Generate CCCD summary
      */
     static generateCCCDSummary(pairsAnalysis, normalized, pairs) {
-        const starSequence = pairsAnalysis.map(p => p.star).join(' → ');
+        const starSequence = pairsAnalysis.map(p => `${p.star} (${p.energyLevel}/4)`).join(' → ');
         const totalFive = pairsAnalysis.reduce((acc,p)=>acc+p.fiveBoost,0);
         const fiveInfo = totalFive > 0 ? ` Có ${totalFive} số 5 tăng năng lượng.` : '';
-        return `Phân tích dựa trên chuỗi số chuẩn hóa '${normalized}' (${pairs.length} cặp số).${fiveInfo} Chuỗi sao: ${starSequence}.`;
+        const dominantStars = this.calculateDominantStars(pairsAnalysis);
+        
+        let summary = `Dãy số có ${pairs.length} cặp số ứng với chuỗi sao: ${starSequence}.${fiveInfo}`;
+        
+        // Add dominant stars section
+        if (dominantStars.length > 0) {
+            const dominantStarTexts = dominantStars.map(star => `${star.star} (${star.reason})`);
+            summary += `\n\nDãy số có chủ đạo là ${dominantStarTexts.join(' và ')}.`;
+            
+            // Add detailed descriptions
+            dominantStars.forEach(star => {
+                if (star.detailedDescription) {
+                    summary += `\n\n**${star.star}**: ${star.detailedDescription}`;
+                }
+            });
+        }
+        
+        return summary;
     }
     
     /**
      * Generate generic summary
      */
     static generateGenericSummary(pairsAnalysis, type) {
-        const starSequence = pairsAnalysis.map(p => p.star).join(' → ');
-        return `Phân tích ${type} với ${pairsAnalysis.length} cặp số. Chuỗi sao: ${starSequence}.`;
+        const starSequence = pairsAnalysis.map(p => `${p.star} (${p.energyLevel}/4)`).join(' → ');
+        const dominantStars = this.calculateDominantStars(pairsAnalysis);
+        
+        let summary = `Dãy số có ${pairsAnalysis.length} cặp số ứng với chuỗi sao: ${starSequence}.`;
+        
+        // Add dominant stars section
+        if (dominantStars.length > 0) {
+            const dominantStarTexts = dominantStars.map(star => `${star.star} (${star.reason})`);
+            summary += `\n\nDãy số có chủ đạo là ${dominantStarTexts.join(' và ')}.`;
+            
+            // Add detailed descriptions
+            dominantStars.forEach(star => {
+                if (star.detailedDescription) {
+                    summary += `\n\n**${star.star}**: ${star.detailedDescription}`;
+                }
+            });
+        }
+        
+        return summary;
     }
     
     /**
@@ -981,6 +1094,7 @@ export class UniversalAnalysisEngine {
                     starKey: starInfo.key,
                     star: starInfo.name,
                     meaning: starInfo.description,
+                    detailedDescription: starInfo.detailedDescription,
                     nature: starInfo.nature,
                     energyLevel,
                     baseEnergyLevel: starInfo.energy || 0

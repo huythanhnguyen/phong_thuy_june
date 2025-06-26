@@ -56,7 +56,7 @@
 
       <!-- Summary -->
       <div v-else-if="type === 'summary'" class="summary">
-        <p class="text-gray-700 leading-relaxed">{{ content }}</p>
+        <div v-html="formatSummaryText(content)" class="text-gray-700 leading-relaxed"></div>
       </div>
 
       <!-- Digit Meanings -->
@@ -263,6 +263,25 @@ const getPositionName = (significance) => {
     'fifth_from_end': 'Thứ 5 từ cuối'
   };
   return names[significance] || 'Không xác định';
+};
+
+const formatSummaryText = (text) => {
+  if (!text) return '';
+  
+  return text
+    // Replace line breaks with HTML breaks
+    .replace(/\n/g, '<br>')
+    // Format bold text (markdown style **text** to HTML)
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-800">$1</strong>')
+    // Add some spacing after periods followed by line breaks for better readability
+    .replace(/\.<br>/g, '.<br><br>')
+    // Format the dominant stars section with better styling
+    .replace(/(Dãy số có chủ đạo là.*?)\.<br>/g, '<div class="mt-4 mb-2 font-medium text-blue-800">$1.</div>')
+    // Add styling to detailed descriptions
+    .replace(/<strong class="font-semibold text-gray-800">(.*?)<\/strong>:/g, 
+      '<div class="mt-4 mb-2"><span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full">$1</span></div><div class="text-sm text-gray-600 leading-relaxed pl-4 border-l-3 border-blue-200 mb-4">')
+    // Close the description divs (look for patterns ending descriptions)
+    .replace(/(<div class="text-sm text-gray-600 leading-relaxed pl-4 border-l-3 border-blue-200 mb-4">.*?)(<br><br>|$)/g, '$1</div>$2');
 };
 </script>
 
