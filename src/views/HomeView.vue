@@ -92,10 +92,38 @@
   </div>
 </section>
 
+    <!-- Phân Tích Nhanh - nhúng UniversalAnalysis -->
+    <section class="py-16 bg-gray-50" id="quick-analysis">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8">Phân Tích Nhanh</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <UniversalAnalysis />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-primary text-white text-center">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-6">Sẵn sàng cải thiện vận mệnh qua Bát Cục Linh Số?</h2>
+        <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+          Đăng ký ngay hôm nay để phân tích chi tiết số điện thoại, biển số xe, CCCD và nhiều hơn nữa!
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button @click="navigateTo('register')" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors">
+            Bắt đầu ngay
+          </button>
+          <button @click="navigateTo('bat-cuc-linh-so')" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
+            Tìm hiểu thêm
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- Features Grid - Cập nhật -->
     <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Ứng Dụng Trong Cuộc Sống</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">Tìm số phù hợp</h2>
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <router-link to="/guides/chon-so-dien-thoai" class="feature-card cursor-pointer">
             <div class="feature-icon">
@@ -126,36 +154,6 @@
             <h3 class="feature-title">Số Tài Khoản</h3>
             <p class="feature-description hidden sm:block">Lựa chọn số tài khoản ngân hàng phù hợp để thu hút tài lộc, thịnh vượng và thuận lợi trong giao dịch tài chính.</p>
           </router-link>
-        </div>
-      </div>
-    </section>
-
-    <!-- Phân Tích Nhanh - nhúng UniversalAnalysis -->
-    <section class="py-16 bg-gray-50" id="quick-analysis">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Phân Tích Nhanh</h2>
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <UniversalAnalysis />
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section removed -->
-
-    <!-- CTA -->
-    <section class="py-16 bg-primary text-white text-center">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-6">Sẵn sàng cải thiện vận mệnh qua Bát Cục Linh Số?</h2>
-        <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-          Đăng ký ngay hôm nay để phân tích chi tiết số điện thoại, biển số xe, CCCD và nhiều hơn nữa!
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <button @click="navigateTo('register')" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors">
-            Bắt đầu ngay
-          </button>
-          <button @click="navigateTo('bat-cuc-linh-so')" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
-            Tìm hiểu thêm
-          </button>
         </div>
       </div>
     </section>
