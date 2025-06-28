@@ -43,22 +43,7 @@
             {{ type.description }}
           </p>
           
-          <!-- Examples (hidden on mobile) -->
-          <div class="type-examples space-y-1 hidden md:block">
-            <div class="text-xs text-gray-400 mb-1">Ví dụ:</div>
-            <div class="flex flex-wrap gap-1 justify-center">
-              <span 
-                v-for="example in type.examples.slice(0, 2)" 
-                :key="example"
-                :class="[
-                  'inline-block px-2 py-1 rounded text-xs',
-                  selectedType === type.id ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'
-                ]"
-              >
-                {{ formatExample(example) }}
-              </span>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -110,18 +95,12 @@ const getIconForType = (iconType) => {
   return icons[iconType] || '📊';
 };
 
-const formatExample = (example) => {
-  // Shorten long examples for display
-  if (example.length > 8) {
-    return example.substring(0, 6) + '...';
-  }
-  return example;
-};
+
 </script>
 
 <style scoped>
 .type-card {
-  min-height: 120px;
+  min-height: 100px;
   display: flex;
   align-items: center;
 }
@@ -129,7 +108,7 @@ const formatExample = (example) => {
 /* Desktop styling */
 @media (min-width: 768px) {
   .type-card {
-    min-height: 180px;
+    min-height: 130px;
   }
 }
 

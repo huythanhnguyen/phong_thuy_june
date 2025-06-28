@@ -55,20 +55,7 @@
         </div>
       </div>
 
-      <!-- Quick Examples -->
-      <div v-if="!analysisResult" class="text-center">
-        <h3 class="text-lg font-semibold text-gray-700 mb-4">Thử ngay với các ví dụ</h3>
-        <div class="flex flex-wrap justify-center gap-2">
-          <button 
-            v-for="example in getCurrentExamples"
-            :key="example"
-            @click="useExample(example)"
-            class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
-          >
-            {{ example }}
-          </button>
-        </div>
-      </div>
+
     </div>
   </div>
 </template>
@@ -91,11 +78,7 @@ const validation = reactive({
   message: ''
 });
 
-// Computed
-const getCurrentExamples = computed(() => {
-  const typeInfo = getNumberTypeInfo(selectedType.value);
-  return typeInfo?.examples || [];
-});
+// Computed properties would go here if needed
 
 // Methods
 const handleTypeChange = (newType) => {
@@ -161,10 +144,7 @@ const performAnalysis = async () => {
   }
 };
 
-const useExample = (example) => {
-  inputValue.value = example;
-  handleInput(example);
-};
+
 
 // Watch for type changes
 watch(selectedType, () => {
