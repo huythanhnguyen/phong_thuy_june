@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { UniversalAnalysisEngine } from '@/utils/analysisEngine';
+import { validateNumberInput } from '@/constants/numberTypes';
 
 export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
   state: () => ({
@@ -57,8 +58,7 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
       }
 
       try {
-        const processor = UniversalAnalysisEngine.getProcessor(this.selectedType);
-        const validation = processor.validate(this.inputValue);
+        const validation = validateNumberInput(this.inputValue, this.selectedType);
         
         if (!validation.valid) {
           this.validation.error = true;

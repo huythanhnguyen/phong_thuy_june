@@ -76,7 +76,7 @@
 <script setup>
 import { ref, reactive, watch, computed } from 'vue';
 import { UniversalAnalysisEngine } from '../utils/analysisEngine.js';
-import { validateNumberInput, getNumberTypeInfo } from '../constants/numberTypes.js';
+import { validateNumberInput, getNumberTypeInfo, validateBirthdateInput } from '../constants/numberTypes.js';
 import NumberTypeSelector from '../components/analysis/NumberTypeSelector.vue';
 import NumberInput from '../components/analysis/NumberInput.vue';
 import AnalysisResults from '../components/analysis/AnalysisResults.vue';

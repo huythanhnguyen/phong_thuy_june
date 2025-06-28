@@ -78,8 +78,14 @@ export class UniversalAnalysisEngine {
      */
     static analyzeCCCD(cccdNumber) {
         try {
+            // Clean input first - remove spaces and non-digits
+            const cleaned = cccdNumber.replace(/\D/g, '');
+            if (!cleaned || cleaned.length < 6) {
+                return { error: 'Số CCCD không hợp lệ' };
+            }
+            
             // Extract last 6 digits
-            const lastSix = cccdNumber.slice(-6);
+            const lastSix = cleaned.slice(-6);
             
             // Xử lý quy tắc thay thế số 0 (giữ nguyên số 5)
             const processedSequence = this.replaceZeroDigits(lastSix);
@@ -127,6 +133,7 @@ export class UniversalAnalysisEngine {
             
             return {
                 originalNumber: cccdNumber,
+                cleanedNumber: cleaned,
                 lastSixDigits: lastSix,
                 processedSequence,
                 normalizedSequence,
