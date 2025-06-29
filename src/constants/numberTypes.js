@@ -50,17 +50,19 @@ export const NUMBER_TYPES = {
         validation: /^[0-9\s]{9,25}$/,
         format: (value) => value.replace(/(\d{4})/g, '$1 ').trim()
     },
-    password: {
-        id: 'password',
-        name: 'Mật Khẩu Số',
-        description: 'Tạo và phân tích mật khẩu số may mắn',
-        icon: 'lock',
-        examples: ['123456', '888999', '168168'],
+    licensePlate: {
+        id: 'licensePlate',
+        name: 'Số Xe',
+        description: 'Phân tích 4-5 số cuối biển số xe',
+        icon: 'car',
+        examples: ['123.45', '1234', '678.90'],
         inputType: 'text',
-        maxLength: 200,
-        placeholder: 'Nhập mật khẩu...',
-        validation: /^.*$/,
-        format: (value) => value
+        maxLength: 6, // Cho phép dấu chấm
+        placeholder: 'Nhập 4-5 số cuối biển số...',
+        // Cho phép 4-5 chữ số, có thể kèm dấu chấm ngăn cách, không cho chữ cái
+        validation: /^[0-9\.\s]{4,6}$/, 
+        // Bỏ dấu chấm và khoảng trống
+        format: (value) => value.replace(/[^0-9]/g, '')
     },
     random: {
         id: 'random',
@@ -81,9 +83,11 @@ export function getNumberTypeInfo(typeId) {
     return NUMBER_TYPES[typeId] || null;
 }
 
-// Lấy tất cả loại số
+// Trả về danh sách loại số theo thứ tự cố định cho UI
 export function getAllNumberTypes() {
-    return Object.values(NUMBER_TYPES);
+    // Thứ tự mong muốn: ngày sinh, căn cước công dân, số tài khoản, mật khẩu số, số điện thoại, số ngẫu nhiên
+    const order = ['birthdate', 'cccd', 'bankAccount', 'licensePlate', 'phone', 'random'];
+    return order.map(id => NUMBER_TYPES[id]);
 }
 
 // Validate input theo loại số
@@ -101,6 +105,14 @@ export function validateNumberInput(value, typeId) {
     }
 
     // Đối với mật khẩu, không giới hạn định dạng – chỉ cần không rỗng
+    if (typeId === 'licensePlate') {
+        const clean = value.replace(/[^0-9]/g, '');
+        if (![4,5].includes(clean.length)) {
+            return { valid: false, message: 'Số xe phải gồm 4 hoặc 5 chữ số' };
+        }
+        return { valid: true, cleanValue: clean };
+    }
+    
     if (typeId === 'password' || typeId === 'random') {
         return { valid: true, cleanValue: value.trim() };
     }
@@ -195,7 +207,7 @@ function getValidationMessage(typeId) {
         cccd: 'Số CCCD phải có định dạng: 087 0 84 000999', 
         birthdate: 'Ngày sinh phải có định dạng dd/mm/yyyy',
         bankAccount: 'Số tài khoản phải có định dạng: 1234 5678 90',
-        password: 'Mật khẩu số không hợp lệ',
+        licensePlate: 'Số xe phải có định dạng: 123.45 hoặc 1234',
         random: 'Chuỗi không hợp lệ'
     };
     return messages[typeId] || 'Định dạng không hợp lệ';

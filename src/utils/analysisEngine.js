@@ -15,21 +15,11 @@ export class UniversalAnalysisEngine {
             // Generate pairs using password pairing logic (handles 0/5 like backend)
             const pairs = this.generatePasswordPairs(normalized.normalizedNumber);
             
-            // Analyze each pair (logic identical với analyzePassword)
+            // Analyze each pair (logic giống mật khẩu nhưng dùng helper để bắt *_ZERO)
             const pairsAnalysis = pairs.map((pair, index) => {
                 const fiveCount = (pair.match(/5/g) || []).length;
 
-                // Ưu tiên tra cứu sao với chuỗi gốc (để bắt *_ZERO)
-                let starInfo = getStarInfoForPair(pair);
-                let recordedPair = pair;
-
-                // Nếu không tìm thấy, fallback bỏ 0/5 và cắt còn 2 ký tự đầu
-                if (starInfo.key === 'UNKNOWN') {
-                    let basePair = pair.replace(/[05]/g, '');
-                    if (basePair.length > 2) basePair = basePair.substring(0, 2);
-                    starInfo = getStarInfoForPair(basePair);
-                    recordedPair = basePair;
-                }
+                const { starInfo, recordedPair } = this._findStarInfoWithZero(pair);
 
                 let energyLevel = (starInfo.energy || 0) + fiveCount;
                 energyLevel = Math.min(4, energyLevel);
@@ -165,29 +155,24 @@ export class UniversalAnalysisEngine {
             
             // Analyze pairs
             const pairsAnalysis = pairs.map((pair, index) => {
-                const cleanPair = pair.replace(/5/g, ''); // Remove 5s to find base star
-                const fiveCount = (pair.match(/5/g) || []).length; // Count 5s in pair
+                const fiveCount = (pair.match(/5/g) || []).length;
                 
-                const starInfo = getStarInfoForPair(cleanPair);
-                let energyLevel = starInfo.energy || 0;
-                
-                // Boost energy by 1 level for each '5' in the pair
-                energyLevel += fiveCount;
-                
-                // Cap energy level at 4 (max level)
-                energyLevel = Math.min(energyLevel, 4);
+                const { starInfo, recordedPair } = this._findStarInfoWithZero(pair);
+
+                let energyLevel = (starInfo.energy || 0) + fiveCount;
+                energyLevel = Math.min(4, energyLevel);
                 
                 return {
                     pairNumber: index + 1,
                     digits: pair,
-                    originalPair: cleanPair, // Store cleaned pair for reference
-                    fiveBoost: fiveCount, // Store number of 5s for transparency
+                    originalPair: recordedPair,
+                    fiveBoost: fiveCount,
                     starKey: starInfo.key,
                     star: starInfo.name,
                     meaning: starInfo.description,
                     nature: starInfo.nature,
-                    energyLevel: energyLevel,
-                    baseEnergyLevel: starInfo.energy // Keep base level for reference
+                    energyLevel,
+                    baseEnergyLevel: starInfo.energy || 0
                 };
             });
             
@@ -766,6 +751,8 @@ export class UniversalAnalysisEngine {
                 return this.analyzeBirthdate(value);
             case 'bankAccount':
                 return this.analyzeBankAccount(value);
+            case 'licensePlate':
+                return this.analyzeLicensePlate(value);
             case 'password':
                 return this.analyzePassword(value);
             case 'random':
@@ -1078,17 +1065,7 @@ export class UniversalAnalysisEngine {
             const pairsAnalysis = pairs.map((pair, index) => {
                 const fiveCount = (pair.match(/5/g) || []).length;
 
-                // Ưu tiên tra cứu sao với chuỗi gốc (có số 0) để bắt biến thể _ZERO
-                let starInfo = getStarInfoForPair(pair);
-                let basePairForRecord = pair;
-
-                // Nếu không tìm thấy, fallback: bỏ 0 & 5 và lấy 2 ký tự đầu
-                if (starInfo.key === 'UNKNOWN') {
-                    let basePair = pair.replace(/[05]/g, '');
-                    if (basePair.length > 2) basePair = basePair.substring(0, 2);
-                    starInfo = getStarInfoForPair(basePair);
-                    basePairForRecord = basePair;
-                }
+                const { starInfo, recordedPair } = this._findStarInfoWithZero(pair);
 
                 let energyLevel = (starInfo.energy || 0) + fiveCount;
                 energyLevel = Math.min(4, energyLevel);
@@ -1096,7 +1073,7 @@ export class UniversalAnalysisEngine {
                 return {
                     pairNumber: index + 1,
                     digits: pair,
-                    originalPair: basePairForRecord,
+                    originalPair: recordedPair,
                     fiveBoost: fiveCount,
                     starKey: starInfo.key,
                     star: starInfo.name,
@@ -1148,5 +1125,86 @@ export class UniversalAnalysisEngine {
             }
         }
         return result;
+    }
+
+    /**
+     * Helper: tìm starInfo với consideration of 0 → *_ZERO
+     */
+    static _findStarInfoWithZero(pair) {
+        let starInfo = getStarInfoForPair(pair);
+        let recordedPair = pair;
+
+        if (starInfo.key !== 'UNKNOWN') {
+            return { starInfo, recordedPair };
+        }
+
+        if (pair.length > 3) {
+            for (let i = 0; i <= pair.length - 3; i++) {
+                const sub = pair.substring(i, i + 3);
+                if (!sub.includes('0')) continue;
+                const info = getStarInfoForPair(sub);
+                if (info.key !== 'UNKNOWN') {
+                    return { starInfo: info, recordedPair: sub };
+                }
+            }
+        }
+
+        let basePair = pair.replace(/[05]/g, '');
+        if (basePair.length > 2) basePair = basePair.substring(0, 2);
+        starInfo = getStarInfoForPair(basePair);
+        recordedPair = basePair;
+
+        return { starInfo, recordedPair };
+    }
+
+    /**
+     * Phân tích biển số xe (4-5 số cuối)
+     */
+    static analyzeLicensePlate(plateDigits) {
+        try {
+            const cleaned = plateDigits.replace(/\D/g, '');
+            if (!cleaned || cleaned.length < 4 || cleaned.length > 5) {
+                return { error: 'Số xe không hợp lệ' };
+            }
+
+            const pairs = this.generatePasswordPairs(cleaned);
+
+            const pairsAnalysis = pairs.map((pair, index) => {
+                const fiveCount = (pair.match(/5/g) || []).length;
+                const { starInfo, recordedPair } = this._findStarInfoWithZero(pair);
+
+                let energyLevel = (starInfo.energy || 0) + fiveCount;
+                energyLevel = Math.min(4, energyLevel);
+
+                return {
+                    pairNumber: index + 1,
+                    digits: pair,
+                    originalPair: recordedPair,
+                    fiveBoost: fiveCount,
+                    starKey: starInfo.key,
+                    star: starInfo.name,
+                    meaning: starInfo.description,
+                    detailedDescription: starInfo.detailedDescription,
+                    nature: starInfo.nature,
+                    energyLevel,
+                    baseEnergyLevel: starInfo.energy || 0
+                };
+            });
+
+            const overallScore = this.calculateOverallScore(pairsAnalysis);
+
+            return {
+                originalNumber: plateDigits,
+                cleanedNumber: cleaned,
+                pairs,
+                pairsAnalysis,
+                overallScore,
+                summary: this.generateGenericSummary(pairsAnalysis, 'licensePlate'),
+                recommendations: this.generateRecommendations(pairsAnalysis, overallScore)
+            };
+        } catch (error) {
+            console.error('License plate analysis error:', error);
+            return { error: 'Lỗi khi phân tích số xe' };
+        }
     }
 } 

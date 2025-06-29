@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { UniversalAnalysisEngine } from '@/utils/analysisEngine';
 import { validateNumberInput } from '@/constants/numberTypes';
+import { useAuthStore } from './auth';
 
 export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
   state: () => ({
@@ -13,10 +14,14 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
     validation: {
       error: false,
       message: ''
-    }
+    },
+    tokenLimit: 300,
+    tokensUsed: 0,
+    tokenDate: ''
   }),
 
   getters: {
+    tokenInfo: (state) => `${state.tokensUsed}/${state.tokenLimit}`,
     hasValidInput: (state) => {
       return state.inputValue.trim().length > 0 && !state.validation.error;
     },
@@ -38,6 +43,48 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
   },
 
   actions: {
+    // Token handling for guest users
+    _loadTokens() {
+      try {
+        const dataStr = localStorage.getItem('analysis-token-usage');
+        if (dataStr) {
+          const data = JSON.parse(dataStr);
+          this.tokenDate = data.date;
+          this.tokensUsed = data.used || 0;
+
+          // Reset if date changed
+          const today = new Date().toISOString().slice(0, 10);
+          if (this.tokenDate !== today) {
+            this.tokensUsed = 0;
+            this.tokenDate = today;
+            this._saveTokens();
+          }
+        } else {
+          this._resetTokens();
+        }
+      } catch (e) {
+        console.error('Token load error', e);
+        this._resetTokens();
+      }
+    },
+
+    _saveTokens() {
+      try {
+        localStorage.setItem('analysis-token-usage', JSON.stringify({
+          date: this.tokenDate,
+          used: this.tokensUsed
+        }));
+      } catch (e) {
+        console.error('Token save error', e);
+      }
+    },
+
+    _resetTokens() {
+      this.tokensUsed = 0;
+      this.tokenDate = new Date().toISOString().slice(0, 10);
+      this._saveTokens();
+    },
+
     setSelectedType(type) {
       this.selectedType = type;
       this.clearInput();
@@ -71,6 +118,19 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
     },
 
     async analyzeNumber(value = null, type = null) {
+      // token check for guests
+      const authStore = useAuthStore();
+
+      if (!authStore.isAuthenticated) {
+        this._loadTokens();
+        if (this.tokensUsed >= this.tokenLimit) {
+          const msg = 'Bạn đã hết lượt phân tích hôm nay. Vui lòng đăng nhập hoặc quay lại vào ngày mai.';
+          this.validation.error = true;
+          this.validation.message = msg;
+          return { error: msg };
+        }
+      }
+
       const inputValue = value || this.inputValue;
       const inputType = type || this.selectedType;
 
@@ -84,6 +144,12 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
         const result = UniversalAnalysisEngine.analyze(inputValue, inputType);
         this.analysisResult = result;
         this.addToHistory(inputValue, inputType, result);
+        
+        // consume token for guests
+        if (!authStore.isAuthenticated) {
+          this.tokensUsed += 1;
+          this._saveTokens();
+        }
         
         // Clear validation errors on successful analysis
         this.validation.error = false;
@@ -214,7 +280,6 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
         cccd: 'Căn Cước Công Dân',
         birthdate: 'Ngày Sinh',
         bankAccount: 'Số Tài Khoản',
-        password: 'Mật Khẩu Số',
         licensePlate: 'Biển Số Xe'
       };
       return typeNames[type] || type;
@@ -309,6 +374,7 @@ export const useUniversalAnalysisStore = defineStore('universalAnalysis', {
     // Initialize store
     init() {
       this.loadHistoryFromLocalStorage();
+      this._loadTokens();
     }
   }
 }); 

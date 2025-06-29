@@ -28,6 +28,10 @@
           @input="handleInput"
           @analyze="performAnalysis"
         />
+        <!-- Token usage for guest -->
+        <div v-if="!isAuthenticated" class="text-sm text-gray-600 mt-2 text-center">
+          Bạn đã sử dụng {{ tokenInfo }} lượt phân tích hôm nay.
+        </div>
       </div>
 
       <!-- Analysis Results -->
@@ -61,12 +65,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, computed } from 'vue';
+import { ref, reactive, watch, computed, onMounted } from 'vue';
 import { UniversalAnalysisEngine } from '../utils/analysisEngine.js';
 import { validateNumberInput, getNumberTypeInfo, validateBirthdateInput } from '../constants/numberTypes.js';
 import NumberTypeSelector from '../components/analysis/NumberTypeSelector.vue';
 import NumberInput from '../components/analysis/NumberInput.vue';
 import AnalysisResults from '../components/analysis/AnalysisResults.vue';
+import { useAuthStore } from '../stores/auth.js';
+import { useUniversalAnalysisStore } from '../stores/universalAnalysis.js';
 
 // Reactive data
 const selectedType = ref('phone');
@@ -78,7 +84,12 @@ const validation = reactive({
   message: ''
 });
 
-// Computed properties would go here if needed
+// Stores
+const authStore = useAuthStore();
+const uaStore = useUniversalAnalysisStore();
+
+const isAuthenticated = computed(() => authStore.isAuthenticated);
+const tokenInfo = computed(() => uaStore.tokenInfo);
 
 // Methods
 const handleTypeChange = (newType) => {
@@ -127,15 +138,17 @@ const performAnalysis = async () => {
   if (!inputValue.value.trim() || !validation.valid) {
     return;
   }
-  
+
   isAnalyzing.value = true;
-  
+
   try {
-    // Simulate small delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
-    const result = UniversalAnalysisEngine.analyze(inputValue.value, selectedType.value);
-    analysisResult.value = result;
+    // small UX delay
+    await new Promise(r => setTimeout(r, 200));
+
+    const result = await uaStore.analyzeNumber(inputValue.value, selectedType.value);
+
+    analysisResult.value = result || uaStore.analysisResult;
+
   } catch (error) {
     console.error('Analysis error:', error);
     analysisResult.value = { error: 'Có lỗi xảy ra khi phân tích' };
@@ -144,11 +157,13 @@ const performAnalysis = async () => {
   }
 };
 
-
-
 // Watch for type changes
 watch(selectedType, () => {
   resetValidation();
+});
+
+onMounted(() => {
+  uaStore.init();
 });
 </script>
 
