@@ -1,0 +1,19 @@
+{
+  "name": "my-first-worker",
+  "version": "1.0.0",
+  "description": "My first Cloudflare Worker example",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env development",
+    "deploy:production": "wrangler deploy --env production",
+    "tail": "wrangler tail",
+    "test": "wrangler dev --test"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+} 

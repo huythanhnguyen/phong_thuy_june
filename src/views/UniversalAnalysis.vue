@@ -1,66 +1,72 @@
 <template>
-  <div class="universal-analysis-page min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-    <!-- Header Section -->
-    <div class="container mx-auto px-4 py-8">
-      <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">
-          Phân Tích Phong Thủy Số Học Tổng Hợp
-        </h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Chọn loại số và nhận kết quả phân tích chi tiết ngay lập tức
-        </p>
-      </div>
+  <div class="min-h-screen flex flex-col">
+    <!-- Sử dụng component Header -->
+    <Header />
 
-      <!-- Number Type Selector -->
-      <div class="mb-8">
-        <NumberTypeSelector 
-          v-model="selectedType" 
-          @change="handleTypeChange"
-        />
-      </div>
+    <div class="universal-analysis-page flex-1 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <!-- Header Section -->
+      <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-gray-800 mb-4">
+            Phân Tích Phong Thủy Số Học Tổng Hợp
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Chọn loại số và nhận kết quả phân tích chi tiết ngay lập tức
+          </p>
+        </div>
 
-      <!-- Input Section -->
-      <div class="mb-8">
-        <NumberInput 
-          :type="selectedType"
-          v-model="inputValue"
-          :validation="validation"
-          @input="handleInput"
-          @analyze="performAnalysis"
-        />
-        <!-- Token usage for guest -->
-        <div v-if="!isAuthenticated" class="text-sm text-gray-600 mt-2 text-center">
-          Bạn đã sử dụng {{ tokenInfo }} lượt phân tích hôm nay.
+        <!-- Number Type Selector -->
+        <div class="mb-8">
+          <NumberTypeSelector 
+            v-model="selectedType" 
+            @change="handleTypeChange"
+          />
+        </div>
+
+        <!-- Input Section -->
+        <div class="mb-8">
+          <NumberInput 
+            :type="selectedType"
+            v-model="inputValue"
+            :validation="validation"
+            @input="handleInput"
+            @analyze="performAnalysis"
+          />
+          <!-- Token usage for guest -->
+          <div v-if="!isAuthenticated" class="text-sm text-gray-600 mt-2 text-center">
+            Bạn đã sử dụng {{ tokenInfo }} lượt phân tích hôm nay.
+          </div>
+        </div>
+
+        <!-- Analysis Results -->
+        <div v-if="analysisResult && !analysisResult.error" class="mb-8">
+          <AnalysisResults 
+            :result="analysisResult"
+            :type="selectedType"
+            :input-value="inputValue"
+            :show-score="false"
+          />
+        </div>
+
+        <!-- Error Display -->
+        <div v-if="analysisResult && analysisResult.error" class="mb-8">
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+            <div class="text-red-600 font-medium">{{ analysisResult.error }}</div>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="isAnalyzing" class="mb-8">
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <div class="text-gray-600">Đang phân tích...</div>
+          </div>
         </div>
       </div>
-
-      <!-- Analysis Results -->
-      <div v-if="analysisResult && !analysisResult.error" class="mb-8">
-        <AnalysisResults 
-          :result="analysisResult"
-          :type="selectedType"
-          :input-value="inputValue"
-          :show-score="false"
-        />
-      </div>
-
-      <!-- Error Display -->
-      <div v-if="analysisResult && analysisResult.error" class="mb-8">
-        <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
-          <div class="text-red-600 font-medium">{{ analysisResult.error }}</div>
-        </div>
-      </div>
-
-      <!-- Loading State -->
-      <div v-if="isAnalyzing" class="mb-8">
-        <div class="bg-white rounded-lg shadow-md p-8 text-center">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <div class="text-gray-600">Đang phân tích...</div>
-        </div>
-      </div>
-
-
     </div>
+
+    <!-- Sử dụng component Footer -->
+    <Footer />
   </div>
 </template>
 
@@ -71,6 +77,8 @@ import { validateNumberInput, getNumberTypeInfo, validateBirthdateInput } from '
 import NumberTypeSelector from '../components/analysis/NumberTypeSelector.vue';
 import NumberInput from '../components/analysis/NumberInput.vue';
 import AnalysisResults from '../components/analysis/AnalysisResults.vue';
+import Header from '@/components/layout/Header.vue';
+import Footer from '@/components/layout/Footer.vue';
 import { useAuthStore } from '../stores/auth.js';
 import { useUniversalAnalysisStore } from '../stores/universalAnalysis.js';
 
