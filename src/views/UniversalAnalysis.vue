@@ -1,9 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- Sử dụng component Header -->
-    <Header />
-
-    <div class="universal-analysis-page flex-1 bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div class="min-h-screen">
+    <div class="universal-analysis-page bg-gradient-to-br from-blue-50 to-indigo-100">
       <!-- Header Section -->
       <div class="container mx-auto px-4 py-8">
         <div class="text-center mb-8">
@@ -65,20 +62,51 @@
       </div>
     </div>
 
-    <!-- Sử dụng component Footer -->
-    <Footer />
+    <!-- Floating Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        @click="navigateToMainAnalysis"
+        class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group"
+        title="Phân tích tổng hợp"
+      >
+        <svg class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+          <!-- I-Ching Bagua Symbol -->
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" fill="none"/>
+          <!-- Yin Yang center -->
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <path d="M12 9 A1.5 1.5 0 0 1 12 15 A1.5 1.5 0 0 0 12 9" fill="white"/>
+          <circle cx="12" cy="10.5" r="0.5" fill="white"/>
+          <circle cx="12" cy="13.5" r="0.5" fill="currentColor"/>
+          <!-- Trigram lines -->
+          <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <!-- Top trigram -->
+            <line x1="12" y1="3" x2="12" y2="5"/>
+            <line x1="10.5" y1="4" x2="13.5" y2="4"/>
+            <!-- Bottom trigram -->  
+            <line x1="12" y1="19" x2="12" y2="21"/>
+            <line x1="10.5" y1="20" x2="13.5" y2="20"/>
+            <!-- Left trigram -->
+            <line x1="3" y1="12" x2="5" y2="12"/>
+            <line x1="4" y1="10.5" x2="4" y2="13.5"/>
+            <!-- Right trigram -->
+            <line x1="19" y1="12" x2="21" y2="12"/>
+            <line x1="20" y1="10.5" x2="20" y2="13.5"/>
+          </g>
+        </svg>
+        <span class="ml-2 text-sm font-medium hidden group-hover:inline-block">Tổng hợp</span>
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, watch, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { UniversalAnalysisEngine } from '../utils/analysisEngine.js';
 import { validateNumberInput, getNumberTypeInfo, validateBirthdateInput } from '../constants/numberTypes.js';
 import NumberTypeSelector from '../components/analysis/NumberTypeSelector.vue';
 import NumberInput from '../components/analysis/NumberInput.vue';
 import AnalysisResults from '../components/analysis/AnalysisResults.vue';
-import Header from '@/components/layout/Header.vue';
-import Footer from '@/components/layout/Footer.vue';
 import { useAuthStore } from '../stores/auth.js';
 import { useUniversalAnalysisStore } from '../stores/universalAnalysis.js';
 
@@ -91,6 +119,9 @@ const validation = reactive({
   valid: true,
   message: ''
 });
+
+// Router
+const router = useRouter();
 
 // Stores
 const authStore = useAuthStore();
@@ -169,6 +200,11 @@ const performAnalysis = async () => {
 watch(selectedType, () => {
   resetValidation();
 });
+
+// Navigation
+const navigateToMainAnalysis = () => {
+  router.push('/main-analysis');
+};
 
 onMounted(() => {
   uaStore.init();

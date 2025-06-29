@@ -4,93 +4,68 @@
     <Header />
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-primary-light to-blue-50 py-16">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col lg:flex-row items-center">
-          <div class="lg:w-1/2 mb-8 lg:mb-0">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Giải Mã Vận Mệnh Qua Bát Cực Linh Số
-            </h1>
-            <p class="text-lg text-gray-700 mb-6">
-              Phương pháp kết hợp Kinh Dịch và Số Học giúp hiểu ý nghĩa của các con số trong cuộc sống. 
-              Áp dụng cho số điện thoại, CCCD, số nhà, biển số xe, tài khoản ngân hàng...
-            </p>
-            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <button @click="navigateTo('register')" class="btn-primary py-3 px-6 text-center">
-                Đăng ký ngay
-              </button>
-              <router-link to="/universal-analysis" class="btn-outline py-3 px-6 text-center">
-                Phân Tích Tổng Hợp
-              </router-link>
-            </div>
+    <section class="hero-banner relative min-h-[95vh] flex items-center justify-center">
+      <!-- Custom Background with I-Ching Pattern -->
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <!-- Golden geometric lines pattern -->
+        <div class="absolute inset-0 opacity-20">
+          <!-- Circular patterns -->
+          <div class="absolute top-10 left-10 w-32 h-32 rounded-full border-2 border-yellow-400"></div>
+          <div class="absolute top-20 left-20 w-24 h-24 rounded-full border border-yellow-300"></div>
+          <div class="absolute bottom-10 right-10 w-40 h-40 rounded-full border-2 border-yellow-400"></div>
+          <div class="absolute bottom-20 right-20 w-28 h-28 rounded-full border border-yellow-300"></div>
+          
+          <!-- Diagonal lines -->
+          <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
+            <div class="absolute top-2/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
+            <div class="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
+            
+            <div class="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-yellow-400 to-transparent"></div>
+            <div class="absolute top-0 left-2/4 w-px h-full bg-gradient-to-b from-transparent via-yellow-300 to-transparent"></div>
+            <div class="absolute top-0 left-3/4 w-px h-full bg-gradient-to-b from-transparent via-yellow-400 to-transparent"></div>
           </div>
-          <div class="lg:w-1/2">
-            <img src="/img/numbers-illustration.svg" alt="Phong thủy số" class="w-full max-w-md mx-auto object-contain" 
-            onerror="this.onerror=null; this.src='https://via.placeholder.com/500x400?text=Phong+Thuy+So'"/>
+          
+          <!-- Hexagram-like patterns -->
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="w-2 h-12 bg-yellow-400 opacity-30 mx-auto mb-1"></div>
+            <div class="w-2 h-6 bg-yellow-400 opacity-30 mx-auto mb-1"></div>
+            <div class="w-2 h-12 bg-yellow-400 opacity-30 mx-auto mb-1"></div>
+            <div class="w-2 h-6 bg-yellow-400 opacity-30 mx-auto mb-1"></div>
+            <div class="w-2 h-12 bg-yellow-400 opacity-30 mx-auto mb-1"></div>
+            <div class="w-2 h-6 bg-yellow-400 opacity-30 mx-auto"></div>
+          </div>
+        </div>
       </div>
+      
+      <!-- Subtle Overlay -->
+      <div class="absolute inset-0 bg-slate-900 bg-opacity-30"></div>
+      
+      <!-- Content Container -->
+      <div class="relative z-10 container mx-auto px-4 text-center">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight text-shadow-lg">
+            Giải Mã Vận Mệnh Qua Bát Cực Linh Số
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed text-shadow-md max-w-3xl mx-auto">
+            Số và người hấp dẫn nhau. Người có từ trường nào sẽ hấp dẫn dãy số tương ứng và ngược lại. 
+            Bát Cực Linh Số giúp hiểu ý nghĩa của các con số trong cuộc sống qua số điện thoại, CCCD, số nhà, biển số xe, tài khoản ngân hàng...
+          </p>
+          
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <button @click="navigateTo('register')" class="btn-primary-hero py-4 px-8 text-lg font-semibold">
+              Đăng ký ngay
+            </button>
+            <router-link to="/main-analysis" class="btn-outline-hero py-4 px-8 text-lg font-semibold">
+              Phân Tích Tổng Hợp
+            </router-link>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="py-12 bg-gradient-to-r from-blue-50 to-indigo-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center mb-6">Bát Cực Linh Số là gì?</h2>
-    <p class="text-center text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
-      Trong thời đại số, con số ảnh hưởng sâu sắc đến cuộc sống hàng ngày
-    </p>
-    
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-xl font-bold mb-3 text-primary">Con Số Trong Cuộc Sống</h3>
-        <p class="text-gray-700 mb-3">
-          Số và người hấp dẫn nhau. Người có từ trường nào sẽ hấp dẫn dãy số tương ứng và ngược lại.
-        </p>
-        <div class="bg-blue-50 p-3 rounded-lg">
-          <p class="italic text-gray-600">
-            "Năng Lượng Số Học là môn học giải thích năng lượng từ trường trong cuộc sống nhân sinh."
-          </p>
-        </div>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-xl font-bold mb-3 text-primary">Minh Chứng Thực Tế</h3>
-        <ul class="space-y-3">
-          <li class="flex items-start">
-            <div class="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-1">
-              <font-awesome-icon icon="check" class="text-green-600 text-xs" />
-            </div>
-            <div class="ml-2">
-              <p class="text-gray-700">
-                <span class="font-semibold">Thành công tài chính:</span> Nhiều người thành công nhờ dãy số vượng Tài, vượng Quan.
-              </p>
-            </div>
-          </li>
-          <li class="flex items-start">
-            <div class="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-1">
-              <font-awesome-icon icon="check" class="text-green-600 text-xs" />
-            </div>
-            <div class="ml-2">
-              <p class="text-gray-700">
-                <span class="font-semibold">Cải thiện quan hệ:</span> Dãy số thúc đào hoa, lợi hôn nhân giúp tìm được hạnh phúc.
-              </p>
-            </div>
-          </li>
-          <li class="flex items-start">
-            <div class="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-1">
-              <font-awesome-icon icon="check" class="text-green-600 text-xs" />
-            </div>
-            <div class="ml-2">
-              <p class="text-gray-700">
-                <span class="font-semibold">Tránh tai ương:</span> Hiểu ý nghĩa số điện thoại, biển số xe để tránh ảnh hưởng xấu.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-  </div>
-</section>
+
 
     <!-- Phân Tích Nhanh - nhúng UniversalAnalysis -->
     <section class="py-16 bg-gray-50" id="quick-analysis">
@@ -469,6 +444,62 @@ onMounted(() => {
   transform: translateY(-2px);
 }
 
+/* Hero Banner Styles */
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-shadow-lg {
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.text-shadow-md {
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-primary-hero {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #1a1a1a;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary-hero:hover {
+  background: linear-gradient(135deg, #FFA500, #FFD700);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.btn-outline-hero {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline-hero:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
 /* Feature Card */
 .feature-card {
   background-color: white;
@@ -558,6 +589,29 @@ onMounted(() => {
   
   .feature-card {
     padding: 1.25rem !important;
+  }
+  
+  .hero-banner {
+    min-height: 100vh;
+  }
+  
+  .hero-banner h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .hero-banner p {
+    font-size: 1.125rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .btn-primary-hero,
+  .btn-outline-hero {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
   }
 }
 </style>

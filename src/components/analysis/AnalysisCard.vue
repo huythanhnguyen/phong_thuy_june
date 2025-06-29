@@ -56,7 +56,36 @@
 
       <!-- Summary -->
       <div v-else-if="type === 'summary'" class="summary">
-        <div v-html="formatSummaryText(content)" class="text-gray-700 leading-relaxed"></div>
+        <div class="text-gray-700 leading-relaxed">
+          <!-- Main summary content -->
+          <div class="summary-main mb-4">
+            <div v-html="formatSummaryMainText(getSummaryMainLine(content))"></div>
+          </div>
+          
+          <!-- See details button -->
+          <div class="mb-2">
+            <button 
+              @click="toggleSummaryDetails"
+              class="text-blue-600 text-sm hover:text-blue-800 transition-colors flex items-center"
+            >
+              {{ showSummaryDetails ? 'Thu gọn' : 'Xem chi tiết' }}
+              <svg 
+                class="w-4 h-4 ml-1 transition-transform duration-200" 
+                :class="{ 'rotate-180': showSummaryDetails }"
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Detailed content (expandable) -->
+          <div v-if="showSummaryDetails" class="mt-3 text-sm text-gray-600 bg-gray-50 p-4 rounded border-l-3 border-blue-200">
+            <div v-html="formatSummaryDetailsText(content)" class="detailed-description"></div>
+          </div>
+        </div>
       </div>
 
       <!-- Digit Meanings -->
@@ -214,7 +243,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // Props
 const props = defineProps({
@@ -238,6 +267,7 @@ const props = defineProps({
 
 // Data
 const expandedItems = ref([]);
+const showSummaryDetails = ref(false);
 
 // Methods
 const toggleDetails = (index) => {
@@ -248,6 +278,121 @@ const toggleDetails = (index) => {
     expandedItems.value.push(index);
   }
 };
+
+const toggleSummaryDetails = () => {
+  showSummaryDetails.value = !showSummaryDetails.value;
+};
+
+const getSummaryMainLine = (text) => {
+  if (!text) return '';
+  
+  const lines = text.split('\n').filter(line => line.trim() !== '');
+  
+  // Tìm dòng chứa "chủ đạo"
+  const dominantLineIndex = lines.findIndex(line => 
+    line.includes('chủ đạo')
+  );
+  
+  if (dominantLineIndex === -1) {
+    return lines[0] || '';
+  }
+  
+  // Bắt đầu từ dòng chủ đạo
+  let result = lines[dominantLineIndex].replace(/\*\*/g, '').trim();
+  
+  // Tìm tên sao và mô tả ngắn
+  for (let i = dominantLineIndex + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    
+    // Nếu là tên sao (bắt đầu với ** và có dấu :)
+    if (line.startsWith('**') && line.includes('**:')) {
+      const starName = line.replace(/\*\*/g, '').replace(':', '').trim();
+      result += `\n\n**${starName}**`;
+      
+      // Lấy dòng đầu tiên của detailedDescription (không có dấu -)
+      if (i + 1 < lines.length) {
+        const nextLine = lines[i + 1].trim();
+        if (!nextLine.startsWith('-') && nextLine.length > 10) {
+          result += `\n${nextLine.replace(/\*\*/g, '')}`;
+        }
+      }
+      break; // Chỉ lấy sao đầu tiên
+    }
+  }
+  
+  return result;
+};
+
+const formatSummaryMainText = (text) => {
+  if (!text) return '';
+  
+  return text
+    // Replace line breaks with HTML breaks
+    .replace(/\n/g, '<br>')
+    // Format star names (bold text) with special styling
+    .replace(/\*\*(.*?)\*\*/g, '<div class="mt-3 mb-2"><span class="star-name-badge inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full">$1</span></div>')
+    // Clean up and add spacing
+    .replace(/(<br>){2,}/g, '<br>')
+    .trim();
+};
+
+const formatSummaryDetailsText = (text) => {
+  if (!text) return '';
+  
+  const lines = text.split('\n').filter(line => line.trim() !== '');
+  
+  // Tìm tên sao chủ đạo
+  const dominantLineIndex = lines.findIndex(line => 
+    line.includes('chủ đạo')
+  );
+  
+  if (dominantLineIndex === -1) {
+    return '';
+  }
+  
+  // Tìm các dòng mô tả chi tiết (bắt đầu với dấu -)
+  const detailLines = [];
+  let foundStar = false;
+  
+  for (let i = dominantLineIndex + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    
+    // Tìm tên sao (bắt đầu với ** và có dấu :)
+    if (line.startsWith('**') && line.includes('**:')) {
+      foundStar = true;
+      continue;
+    }
+    
+    // Nếu đã tìm thấy sao và gặp dòng bắt đầu với -, thêm vào details
+    if (foundStar && line.startsWith('-')) {
+      detailLines.push(line);
+    }
+    // Nếu gặp sao tiếp theo, dừng lại
+    else if (foundStar && line.startsWith('**')) {
+      break;
+    }
+  }
+  
+  const detailsText = detailLines.join('\n');
+  
+  return detailsText
+    // Format bullet points (lines starting with -)
+    .replace(/- (.+)/g, '<div class="bullet-point">• $1</div>')
+    // Format bold text (markdown style **text** to HTML)
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-700">$1</strong>')
+    // Replace line breaks with HTML breaks (after bullet formatting)
+    .replace(/\n/g, '<br>')  
+    // Clean up extra breaks
+    .replace(/(<br>){2,}/g, '<br>')
+    // Remove leading/trailing breaks
+    .replace(/^(<br>)+|(<br>)+$/g, '')
+    .trim();
+};
+
+// Reset state on mount
+onMounted(() => {
+  showSummaryDetails.value = false;
+});
 
 const formatDetailedDescription = (description) => {
   if (typeof description === 'string') {
@@ -338,6 +483,35 @@ const formatSummaryText = (text) => {
 
 .digit-item:hover {
   background-color: #F8FAFC;
+}
+
+/* Summary specific styles */
+.summary-main {
+  line-height: 1.6;
+}
+
+.summary-main :deep(.star-name-badge) {
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+.detailed-description {
+  line-height: 1.6;
+}
+
+.detailed-description :deep(br) {
+  margin-bottom: 0.5rem;
+}
+
+.detailed-description :deep(.bullet-point) {
+  margin-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.detailed-description :deep(.bullet-point:last-child) {
+  margin-bottom: 0;
 }
 
 /* Responsive */

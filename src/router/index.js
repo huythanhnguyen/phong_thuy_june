@@ -7,6 +7,7 @@ import Pricing from '../views/Pricing.vue'
 import PaymentView from '../views/PaymentView.vue'
 import TC from '../views/TC.vue'
 import UniversalAnalysis from '../views/UniversalAnalysis.vue'
+import MainAnalysis from '../views/MainAnalysis.vue'
 
 // Thêm import cho các trang con
 import BatCucLinhSo from '../views/guides/BatCucLinhSo.vue'
@@ -42,6 +43,16 @@ const router = createRouter({
       meta: { 
         title: 'Phân Tích Phong Thủy Số Học Tổng Hợp',
         description: 'Phân tích mọi loại số với phong thủy số học'
+      }
+    },
+    // Thêm route Main Analysis
+    {
+      path: '/main-analysis',
+      name: 'mainAnalysis',
+      component: MainAnalysis,
+      meta: { 
+        title: 'Phân Tích Phong Thủy Tổng Hợp',
+        description: 'Phân tích toàn diện các yếu tố Tiên thiên và Hậu thiên'
       }
     },
     // Thêm các route mới
